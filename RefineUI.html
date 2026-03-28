@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RefineUI — PyXplore · WPEM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-base:#070c18;--bg-surface:#0d1526;--bg-card:#111b2e;--bg-card2:#152036;
+  --bg-input:#0c172a;--bg-input-focus:#0f1d36;
+  --border:#1a3050;--border-mid:#234266;--border-focus:#0ea5e9;
+  --accent:#06b6d4;--accent2:#3b82f6;--accent3:#8b5cf6;
+  --green:#10b981;--amber:#f59e0b;--red:#ef4444;
+  --txt:#e8f0fe;--txt2:#94a3b8;--txt3:#4b6080;
+  --code-bg:#060d18;
+  --grad1:linear-gradient(135deg,#06b6d4,#3b82f6);
+  --grad2:linear-gradient(135deg,#8b5cf6,#06b6d4);
+  --glow:0 0 60px rgba(6,182,212,0.12);
+  --r:12px;--rs:8px;--rx:18px;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:'Inter',sans-serif;background:var(--bg-base);color:var(--txt);min-height:100vh;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 90% 60% at 15% -10%,rgba(6,182,212,.07) 0%,transparent 55%),radial-gradient(ellipse 70% 50% at 85% 110%,rgba(59,130,246,.05) 0%,transparent 55%);pointer-events:none;z-index:0}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.hdr{position:sticky;top:0;z-index:200;background:rgba(7,12,24,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.hdr-in{max-width:1360px;margin:0 auto;height:62px;display:flex;align-items:center;gap:1.2rem;padding:0 1.8rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.brand-icon{width:34px;height:34px;background:var(--grad1);border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:.95rem;color:#fff;letter-spacing:-.5px;box-shadow:0 4px 20px rgba(6,182,212,.35)}
+.brand-name{font-size:1.08rem;font-weight:700;color:var(--txt);letter-spacing:-.3px}
+.brand-name em{font-style:normal;color:var(--accent)}
+.badge{font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:999px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.28);color:var(--accent);letter-spacing:.07em;text-transform:uppercase}
+.sp{flex:1}
+.hdr-link{font-size:.8rem;color:var(--txt2);text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:5px 11px;border-radius:var(--rs);transition:all .18s var(--ease)}
+.hdr-link:hover{color:var(--accent);background:rgba(6,182,212,.09)}
+.hdr-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ─── LAYOUT ─────────────────────────────────────────────────── */
+.wrap{max-width:1360px;margin:0 auto;padding:2rem 1.8rem 4rem;position:relative;z-index:1}
+
+/* ─── HERO SECTION ───────────────────────────────────────────── */
+.hero{text-align:center;padding:2.2rem 0 1.8rem;margin-bottom:2rem}
+.hero-title{font-size:2.2rem;font-weight:800;letter-spacing:-.5px;line-height:1.2;margin-bottom:.6rem}
+.hero-title .hi{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--txt2);font-size:.92rem;max-width:560px;margin:0 auto 1.2rem}
+.hero-chips{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.chip{font-size:.72rem;font-weight:500;padding:4px 12px;border-radius:999px;border:1px solid var(--border-mid);color:var(--txt2);background:rgba(13,21,38,.6)}
+.chip.c1{border-color:rgba(6,182,212,.35);color:var(--accent);background:rgba(6,182,212,.07)}
+.chip.c2{border-color:rgba(59,130,246,.35);color:var(--accent2);background:rgba(59,130,246,.07)}
+.chip.c3{border-color:rgba(139,92,246,.35);color:var(--accent3);background:rgba(139,92,246,.07)}
+
+/* ─── TABS ───────────────────────────────────────────────────── */
+.tabs{display:flex;gap:.5rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--rx);padding:.4rem;margin-bottom:2rem}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:.55rem;padding:.65rem 1.2rem;border-radius:calc(var(--rx) - 4px);border:none;background:transparent;color:var(--txt2);font-family:inherit;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .2s var(--ease);position:relative}
+.tab svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+.tab.active{background:var(--bg-card2);color:var(--txt);box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.tab.active.t1{color:var(--accent)}
+.tab.active.t2{color:var(--accent2)}
+
+/* ─── STEP FLOW ──────────────────────────────────────────────── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.step{display:flex;align-items:flex-start;gap:.85rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.25rem;transition:border-color .2s}
+.step:hover{border-color:var(--border-mid)}
+.step-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
+.s1 .step-num{background:rgba(6,182,212,.15);color:var(--accent)}
+.s2 .step-num{background:rgba(59,130,246,.15);color:var(--accent2)}
+.step-title{font-size:.83rem;font-weight:600;margin-bottom:.2rem}
+.step-desc{font-size:.76rem;color:var(--txt2);line-height:1.5}
+
+/* ─── PANEL / CARD ───────────────────────────────────────────── */
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1.5rem;transition:border-color .2s}
+.panel:hover{border-color:var(--border-mid)}
+.panel-hdr{display:flex;align-items:center;gap:.7rem;padding:1rem 1.4rem;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.panel-hdr svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.panel-hdr .ph-icon{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;flex-shrink:0}
+.ic-teal{background:rgba(6,182,212,.12);color:var(--accent)}
+.ic-blue{background:rgba(59,130,246,.12);color:var(--accent2)}
+.ic-purple{background:rgba(139,92,246,.12);color:var(--accent3)}
+.ic-green{background:rgba(16,185,129,.12);color:var(--green)}
+.ic-amber{background:rgba(245,158,11,.12);color:var(--amber)}
+.panel-title{font-size:.92rem;font-weight:600;flex:1}
+.panel-subtitle{font-size:.75rem;color:var(--txt2);margin-top:.05rem}
+.panel-chevron{width:16px;height:16px;stroke:var(--txt3);fill:none;stroke-width:2;transition:transform .22s var(--ease)}
+.panel.open .panel-chevron{transform:rotate(180deg)}
+.panel-body{display:none;padding:1.4rem}
+.panel.open .panel-body{display:block}
+
+/* ─── FILE UPLOAD ZONE ───────────────────────────────────────── */
+.upload-zone{border:2px dashed var(--border-mid);border-radius:var(--r);padding:1.8rem 1.4rem;text-align:center;transition:all .2s var(--ease);cursor:pointer;background:rgba(13,21,38,.4);position:relative}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:rgba(6,182,212,.04)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{width:38px;height:38px;margin:0 auto .8rem;display:grid;place-items:center;background:rgba(6,182,212,.1);border-radius:10px;color:var(--accent)}
+.upload-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+.upload-title{font-size:.9rem;font-weight:600;margin-bottom:.25rem}
+.upload-hint{font-size:.76rem;color:var(--txt2)}
+.upload-types{display:flex;gap:.4rem;justify-content:center;margin-top:.7rem;flex-wrap:wrap}
+.upload-type{font-size:.68rem;padding:2px 8px;border-radius:4px;background:var(--bg-input);border:1px solid var(--border);color:var(--txt2);font-family:'JetBrains Mono',monospace}
+.file-status{margin-top:1rem;display:none}
+.file-status.show{display:block}
+.file-ok{display:flex;align-items:center;gap:.5rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:var(--rs);padding:.6rem .9rem;font-size:.8rem;color:var(--green)}
+.file-err{display:flex;align-items:flex-start;gap:.5rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:var(--rs);padding:.6rem .9rem;font-size:.8rem;color:var(--red)}
+.file-ok svg,.file-err svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;flex-shrink:0;margin-top:.05rem}
+
+/* ─── DATA PREVIEW ───────────────────────────────────────────── */
+.data-preview{margin-top:1rem;display:none;border-radius:var(--rs);overflow:hidden;border:1px solid var(--border)}
+.data-preview.show{display:block}
+.preview-hdr{background:var(--bg-input);padding:.5rem 1rem;font-size:.74rem;font-weight:600;color:var(--txt2);display:flex;justify-content:space-between;align-items:center}
+.preview-table{width:100%;border-collapse:collapse;font-size:.78rem;font-family:'JetBrains Mono',monospace}
+.preview-table th{background:var(--bg-input);padding:.4rem .8rem;color:var(--txt2);font-weight:500;text-align:left;border-bottom:1px solid var(--border)}
+.preview-table td{padding:.35rem .8rem;border-bottom:1px solid rgba(26,48,80,.4);color:var(--txt)}
+.preview-table tr:last-child td{border-bottom:none}
+
+/* ─── PARAM GRID ─────────────────────────────────────────────── */
+.param-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;margin-top:1rem}
+.param-item{background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.1rem;transition:border-color .18s}
+.param-item:focus-within{border-color:var(--border-focus)}
+.param-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem;gap:.5rem}
+.param-name{font-size:.82rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.param-badge{font-size:.64rem;padding:2px 7px;border-radius:999px;font-weight:600;font-family:inherit;white-space:nowrap}
+.pb-req{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:var(--red)}
+.pb-opt{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:var(--green)}
+.pb-adv{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:var(--amber)}
+.param-label{font-size:.78rem;font-weight:500;color:var(--txt);margin-bottom:.1rem}
+.param-desc{font-size:.73rem;color:var(--txt2);line-height:1.5;margin-bottom:.7rem}
+.param-range{font-size:.7rem;color:var(--txt3);margin-top:.3rem;font-family:'JetBrains Mono',monospace}
+label.param-label-outer{display:block;font-size:.78rem;font-weight:500;color:var(--txt);margin-bottom:.4rem}
+
+/* ─── INPUTS ─────────────────────────────────────────────────── */
+input[type=number],input[type=text],select{width:100%;background:var(--bg-card);border:1px solid var(--border);color:var(--txt);border-radius:var(--rs);padding:.55rem .8rem;font-size:.83rem;font-family:inherit;transition:border-color .18s,background .18s;outline:none;-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input:focus,select:focus{border-color:var(--border-focus);background:var(--bg-input-focus)}
+select{cursor:pointer}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.input-with-unit{position:relative;display:flex}
+.input-with-unit input{border-radius:var(--rs) 0 0 var(--rs);flex:1}
+.unit{background:var(--bg-surface);border:1px solid var(--border);border-left:none;border-radius:0 var(--rs) var(--rs) 0;padding:.55rem .7rem;font-size:.77rem;color:var(--txt3);white-space:nowrap;display:flex;align-items:center}
+.wavelength-preset{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
+.wl-btn{font-size:.72rem;padding:4px 10px;border-radius:6px;border:1px solid var(--border-mid);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .15s}
+.wl-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(6,182,212,.07)}
+.wl-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(6,182,212,.12)}
+
+/* ─── BUTTONS ────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1.6rem;border-radius:var(--r);border:none;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s var(--ease);white-space:nowrap}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.btn-primary{background:var(--grad1);color:#fff;box-shadow:0 4px 20px rgba(6,182,212,.3)}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 28px rgba(6,182,212,.4)}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{background:var(--bg-card2);color:var(--txt);border:1px solid var(--border-mid)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--txt2);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--border-mid);color:var(--txt)}
+.btn-sm{padding:.45rem 1rem;font-size:.79rem}
+.btn-icon{padding:.5rem;border-radius:var(--rs)}
+.btn-success{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.btn-success:hover{background:rgba(16,185,129,.22)}
+.action-bar{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;padding-top:1.2rem;border-top:1px solid var(--border)}
+.action-hint{font-size:.75rem;color:var(--txt2);flex:1}
+
+/* ─── CODE OUTPUT ────────────────────────────────────────────── */
+.code-section{margin-top:1.5rem;display:none}
+.code-section.show{display:block}
+.code-hdr{display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;background:rgba(6,12,24,.8);border:1px solid var(--border);border-bottom:none;border-radius:var(--r) var(--r) 0 0}
+.code-lang{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:4px;background:rgba(59,130,246,.15);color:var(--accent2);font-family:'JetBrains Mono',monospace}
+.code-title{font-size:.79rem;color:var(--txt2);flex:1}
+.copy-btn{display:flex;align-items:center;gap:.4rem;font-size:.76rem;padding:4px 10px;border-radius:6px;border:1px solid var(--border-mid);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .15s}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.copy-btn.copied{border-color:var(--green);color:var(--green)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+.code-box{background:var(--code-bg);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:1.2rem 1.4rem;overflow-x:auto;max-height:500px;overflow-y:auto}
+.code-box pre{font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.7;white-space:pre;color:#c9d1d9}
+/* Syntax colors */
+.kw{color:#ff7b72}.fn{color:#d2a8ff}.st{color:#a5d6ff}
+.cm{color:#8b949e;font-style:italic}.nb{color:#79c0ff}
+.nm{color:#ffa657}.op{color:#ff7b72}
+
+/* ─── LATTICE CONSTANTS ──────────────────────────────────────── */
+.latt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.latt-item{}
+.latt-label{font-size:.74rem;font-weight:600;color:var(--txt2);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
+.latt-label em{font-style:normal;color:var(--txt3);font-size:.68rem}
+.crystal-select{margin-bottom:1rem}
+.crystal-hint{font-size:.74rem;color:var(--txt3);margin-top:.5rem;padding:.5rem .8rem;background:rgba(245,158,11,.06);border-left:2px solid var(--amber);border-radius:0 var(--rs) var(--rs) 0}
+
+/* ─── SECTION DIVIDER ────────────────────────────────────────── */
+.sec-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);margin:1.5rem 0 .8rem;display:flex;align-items:center;gap:.7rem}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-label.c-teal{color:var(--accent)}
+.sec-label.c-blue{color:var(--accent2)}
+.sec-label.c-purple{color:var(--accent3)}
+
+/* ─── INFO BOX ───────────────────────────────────────────────── */
+.info-box{padding:.75rem 1rem;border-radius:var(--rs);font-size:.77rem;line-height:1.55;margin-bottom:1rem}
+.ib-teal{background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);color:#a7f3f9}
+.ib-blue{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);color:#bfdbfe}
+.ib-amber{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);color:#fde68a}
+.ib-green{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);color:#a7f3d0}
+.info-box strong{font-weight:600;display:block;margin-bottom:.2rem}
+
+/* ─── PROGRESS INDICATOR ─────────────────────────────────────── */
+.prog-bar-wrap{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:1.5rem}
+.prog-bar{height:100%;background:var(--grad1);border-radius:2px;transition:width .4s var(--ease);width:0%}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:700px){
+  .latt-grid{grid-template-columns:repeat(2,1fr)}
+  .param-grid{grid-template-columns:1fr}
+  .hero-title{font-size:1.6rem}
+  .tabs{flex-direction:column}
+  .steps{grid-template-columns:1fr}
+}
+
+/* ─── TOOLTIP ────────────────────────────────────────────────── */
+.tooltip-wrap{position:relative;display:inline-flex}
+.tooltip-wrap .tt{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a2942;border:1px solid var(--border-mid);border-radius:8px;padding:.5rem .75rem;font-size:.72rem;color:var(--txt);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:99;max-width:220px;white-space:normal;text-align:center}
+.tooltip-wrap:hover .tt{opacity:1}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg-card)}
+::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#2d5080}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════════ -->
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="#">
+      <div class="brand-icon">Px</div>
+      <span class="brand-name"><em>Py</em>Xplore</span>
+    </a>
+    <span class="badge">RefineUI</span>
+    <div class="sp"></div>
+    <a class="hdr-link" href="https://github.com/Bin-Cao/PyWPEM" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+      PyWPEM
+    </a>
+    <a class="hdr-link" href="https://xqueryer.caobin.asia/" target="_blank">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Phase ID
+    </a>
+  </div>
+</header>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════════ -->
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="hero-title"><span class="hi">RefineUI</span> · PyXplore Toolkit</h1>
+    <p class="hero-sub">Whole-Pattern Expectation Maximization (WPEM) — Professional UI for background subtraction and lattice constant refinement of XRD data.</p>
+    <div class="hero-chips">
+      <span class="chip c1">WPEM Engine</span>
+      <span class="chip c2">Cu Kα / Mo Kα / Co Kα</span>
+      <span class="chip c3">AI-Driven Refinement</span>
+      <span class="chip">Local · No Server Required</span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab t1 active" onclick="switchTab('bac')">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Background Processing
+    </button>
+    <button class="tab t2" onclick="switchTab('ref')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/></svg>
+      Lattice Refinement (XRD Fit)
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       TAB 1 : BACKGROUND PROCESSING
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-bac">
+
+    <!-- Workflow steps -->
+    <div class="steps">
+      <div class="step s1">
+        <div class="step-num">1</div>
+        <div><div class="step-title">Upload XRD Data</div><div class="step-desc">CSV file with two columns: 2θ (°) in column 1, intensity in column 2. No header row required.</div></div>
+      </div>
+      <div class="step s1">
+        <div class="step-num">2</div>
+        <div><div class="step-title">Configure Parameters</div><div class="step-desc">Adjust background fitting parameters. Hover each field for detailed explanations of its effect.</div></div>
+      </div>
+      <div class="step s1">
+        <div class="step-num">3</div>
+        <div><div class="step-title">Generate & Run Script</div><div class="step-desc">Copy the generated Python script and run it. Outputs <code style="font-family:monospace;font-size:.85em">bac.csv</code> and <code style="font-family:monospace;font-size:.85em">no_bac_intensity.csv</code>.</div></div>
+      </div>
+    </div>
+
+    <!-- File Upload Panel -->
+    <div class="panel open" id="panelBacUpload">
+      <div class="panel-hdr" onclick="togglePanel('panelBacUpload')">
+        <div class="ph-icon ic-teal"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div><div class="panel-title">Step 1 — Upload Diffraction Data</div><div class="panel-subtitle">intensity.csv · 2 columns · no header</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="info-box ib-teal">
+          <strong>📋 File Format Requirements</strong>
+          The CSV file must contain <strong>exactly 2 columns</strong>: column 1 = 2θ angle (degrees, 0–180), column 2 = intensity (non-negative). No header row. Delimiter: comma or whitespace. Typical size: 1,000–10,000 rows.
+        </div>
+        <div class="upload-zone" id="dropBac" ondragover="handleDrag(event,'dropBac')" ondragleave="handleDragLeave(event,'dropBac')" ondrop="handleDrop(event,'bac')">
+          <input type="file" accept=".csv,.txt,.dat" id="fileBac" onchange="handleFileSelect('bac')">
+          <div class="upload-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div class="upload-title">Drag & Drop or Click to Upload</div>
+          <div class="upload-hint">intensity.csv — your XRD raw data file</div>
+          <div class="upload-types"><span class="upload-type">.csv</span><span class="upload-type">.txt</span><span class="upload-type">.dat</span></div>
+        </div>
+        <div class="file-status" id="statusBac"></div>
+        <div class="data-preview" id="previewBac">
+          <div class="preview-hdr"><span>Data Preview (first 6 rows)</span><span id="previewBacInfo" style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.72rem"></span></div>
+          <table class="preview-table"><thead><tr><th>#</th><th>2θ (°)</th><th>Intensity</th></tr></thead><tbody id="previewBacBody"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parameters Panel -->
+    <div class="panel open" id="panelBacParams">
+      <div class="panel-hdr" onclick="togglePanel('panelBacParams')">
+        <div class="ph-icon ic-purple"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
+        <div><div class="panel-title">Step 2 — BackgroundFit Parameters</div><div class="panel-subtitle">WPEM.BackgroundFit( intensity_csv, lowAngleRange, poly_n, bac_split, bac_num )</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="param-grid">
+
+          <!-- lowAngleRange -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">lowAngleRange</span><span class="param-badge pb-req">Required</span></div>
+            <div class="param-label">Low-Angle Cutoff (2θ °)</div>
+            <div class="param-desc">The minimum 2θ angle (in degrees) included in the background fit. Data below this threshold is excluded, which suppresses air-scatter artifacts and instrumental low-angle artefacts common in diffractometer setups. Increase this value if you observe a steep rising background near zero.</div>
+            <div class="input-with-unit"><input type="number" id="b_lowAngle" value="17" min="0" max="90" step="0.5"><span class="unit">°</span></div>
+            <div class="param-range">Range: 0 – 90° · Typical: 5 – 25°</div>
+          </div>
+
+          <!-- poly_n -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">poly_n</span><span class="param-badge pb-req">Required</span></div>
+            <div class="param-label">Polynomial Degree</div>
+            <div class="param-desc">Degree of the polynomial used to model the background curve. Higher values allow the fitted background to follow complex curvatures (e.g., amorphous humps), but risk overfitting and spurious oscillations. For simple crystalline samples use 5–10; for amorphous-rich samples use 10–15.</div>
+            <input type="number" id="b_polyN" value="13" min="1" max="30" step="1">
+            <div class="param-range">Range: 1 – 30 · Typical: 8 – 15</div>
+          </div>
+
+          <!-- bac_split -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">bac_split</span><span class="param-badge pb-req">Required</span></div>
+            <div class="param-label">Background Anchor Segments</div>
+            <div class="param-desc">Number of equally spaced anchor regions (segments) used to define the piecewise background baseline. A larger value provides more local control over the background shape, useful when the background varies significantly across the angular range. Too many segments may over-segment the background.</div>
+            <input type="number" id="b_bacSplit" value="16" min="2" max="100" step="1">
+            <div class="param-range">Range: 2 – 100 · Typical: 8 – 30</div>
+          </div>
+
+          <!-- bac_num -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">bac_num</span><span class="param-badge pb-opt">Optional</span></div>
+            <div class="param-label">Monte Carlo Optimization Steps</div>
+            <div class="param-desc">Number of stochastic optimization iterations used to fit the background polynomial. More iterations improve convergence quality but increase computation time linearly. For quick exploratory fits use 100–200; for publication-quality results use 500–1000+.</div>
+            <input type="number" id="b_bacNum" value="300" min="50" max="5000" step="50">
+            <div class="param-range">Range: 50 – 5000 · Typical: 200 – 600</div>
+          </div>
+
+        </div><!-- /param-grid -->
+
+        <div class="action-bar">
+          <span class="action-hint">All parameters validated · Click to generate the Python script</span>
+          <button class="btn btn-secondary btn-sm" onclick="resetBacParams()">
+            <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9M3 3v4h4"/></svg> Reset Defaults
+          </button>
+          <button class="btn btn-primary" onclick="generateBacCode()">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Generate Python Code
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Output -->
+    <div class="code-section" id="codeBac">
+      <div class="code-hdr">
+        <span class="code-lang">Python</span>
+        <span class="code-title">BackgroundFit Script — ready to run in your project directory</span>
+        <button class="copy-btn" onclick="copyCode('codeBacPre',this)">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+      <div class="code-box"><pre id="codeBacPre"></pre></div>
+      <div style="margin-top:.8rem" class="info-box ib-green">
+        <strong>📁 Output files</strong>
+        After running this script, a <code style="font-family:monospace">ConvertedDocuments/</code> folder will be created. Copy <code style="font-family:monospace">bac.csv</code> and <code style="font-family:monospace">no_bac_intensity.csv</code> to your working directory — they are required for the refinement step.
+      </div>
+    </div>
+
+  </div><!-- /tab-bac -->
+
+  <!-- ══════════════════════════════════════════════════════════════
+       TAB 2 : XRD REFINEMENT
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-ref" style="display:none">
+
+    <div class="steps">
+      <div class="step s2"><div class="step-num">1</div><div><div class="step-title">Upload Required Files</div><div class="step-desc">intensity.csv, bac.csv, no_bac_intensity.csv (from background step) and the .cif reference structure file.</div></div></div>
+      <div class="step s2"><div class="step-num">2</div><div><div class="step-title">CIF Preprocessing</div><div class="step-desc">Set 2θ range and wavelength. The CIFpreprocess step generates peak0.csv (rename from xxxHKL.csv).</div></div></div>
+      <div class="step s2"><div class="step-num">3</div><div><div class="step-title">Lattice Constants &amp; Fitting</div><div class="step-desc">Enter initial lattice parameters and configure XRDfit options. WPEM iteratively refines the structure.</div></div></div>
+    </div>
+
+    <!-- Files Upload Panel -->
+    <div class="panel open" id="panelRefFiles">
+      <div class="panel-hdr" onclick="togglePanel('panelRefFiles')">
+        <div class="ph-icon ic-blue"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div><div class="panel-title">Step 1 — Upload Data Files</div><div class="panel-subtitle">intensity.csv · bac.csv · no_bac_intensity.csv · reference .cif</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="info-box ib-blue">
+          <strong>📂 Four files are required for refinement</strong>
+          Files 1–3 come from the Background Processing step. File 4 (.cif) is the reference crystal structure for your target phase. If unknown, use the <a href="https://xqueryer.caobin.asia/" target="_blank" style="color:var(--accent)">XQueryer</a> phase identification tool first.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <!-- intensity.csv -->
+          <div>
+            <label class="param-label-outer">① intensity.csv <span style="color:var(--txt3);font-size:.72rem">(raw XRD data)</span></label>
+            <div class="upload-zone" id="dropRI" ondragover="handleDrag(event,'dropRI')" ondragleave="handleDragLeave(event,'dropRI')" ondrop="handleDrop(event,'ri')">
+              <input type="file" accept=".csv,.txt" id="fileRI" onchange="handleFileSelect('ri')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">intensity.csv</div>
+              <div class="upload-hint" style="font-size:.7rem">Raw 2θ–intensity data</div>
+            </div>
+            <div class="file-status" id="statusRI"></div>
+          </div>
+          <!-- bac.csv -->
+          <div>
+            <label class="param-label-outer">② bac.csv <span style="color:var(--txt3);font-size:.72rem">(background data)</span></label>
+            <div class="upload-zone" id="dropBacF" ondragover="handleDrag(event,'dropBacF')" ondragleave="handleDragLeave(event,'dropBacF')" ondrop="handleDrop(event,'bacf')">
+              <input type="file" accept=".csv,.txt" id="fileBacF" onchange="handleFileSelect('bacf')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">bac.csv</div>
+              <div class="upload-hint" style="font-size:.7rem">From ConvertedDocuments/</div>
+            </div>
+            <div class="file-status" id="statusBacF"></div>
+          </div>
+          <!-- no_bac_intensity.csv -->
+          <div>
+            <label class="param-label-outer">③ no_bac_intensity.csv <span style="color:var(--txt3);font-size:.72rem">(background-subtracted)</span></label>
+            <div class="upload-zone" id="dropNB" ondragover="handleDrag(event,'dropNB')" ondragleave="handleDragLeave(event,'dropNB')" ondrop="handleDrop(event,'nb')">
+              <input type="file" accept=".csv,.txt" id="fileNB" onchange="handleFileSelect('nb')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">no_bac_intensity.csv</div>
+              <div class="upload-hint" style="font-size:.7rem">From ConvertedDocuments/</div>
+            </div>
+            <div class="file-status" id="statusNB"></div>
+          </div>
+          <!-- .cif file -->
+          <div>
+            <label class="param-label-outer">④ Reference .cif file <span style="color:var(--txt3);font-size:.72rem">(crystal structure)</span></label>
+            <div class="upload-zone" id="dropCIF" ondragover="handleDrag(event,'dropCIF')" ondragleave="handleDragLeave(event,'dropCIF')" ondrop="handleDrop(event,'cif')">
+              <input type="file" accept=".cif" id="fileCIF" onchange="handleFileSelect('cif')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem;background:rgba(139,92,246,.12);color:var(--accent3)"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">Structure.cif</div>
+              <div class="upload-hint" style="font-size:.7rem">e.g., Mn2O3.cif · from ICSD/COD</div>
+            </div>
+            <div class="file-status" id="statusCIF"></div>
+          </div>
+        </div><!-- /grid -->
+      </div>
+    </div><!-- /panel -->
+
+    <!-- CIF + Wavelength Panel -->
+    <div class="panel open" id="panelCIF">
+      <div class="panel-hdr" onclick="togglePanel('panelCIF')">
+        <div class="ph-icon ic-purple"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <div><div class="panel-title">Step 2 — CIF Preprocessing &amp; Wavelength</div><div class="panel-subtitle">WPEM.CIFpreprocess( filepath, two_theta_range ) &amp; X-ray source wavelength</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+
+        <div class="sec-label c-purple">CIF Preprocessing Parameters</div>
+        <div class="param-grid">
+
+          <!-- CIF filepath -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">filepath</span><span class="param-badge pb-req">Required</span></div>
+            <div class="param-label">CIF Filename</div>
+            <div class="param-desc">Filename of the reference crystal structure file (CIF format). Must be placed in the same working directory as your Python script. Obtained from crystallographic databases such as ICSD, COD, or the Materials Project. Example: <code style="font-size:.85em;font-family:monospace">Mn2O3.cif</code></div>
+            <input type="text" id="r_cifName" placeholder="e.g. Mn2O3.cif" value="Mn2O3.cif">
+          </div>
+
+          <!-- two_theta_range min -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">two_theta_range</span><span class="param-badge pb-req">Required</span></div>
+            <div class="param-label">2θ Angular Range (min, max)</div>
+            <div class="param-desc">The angular window (in degrees) for generating the theoretical peak list (HKL file) from the CIF. This range should match or slightly exceed your measured data range. Reflections outside this window are excluded from the fit.</div>
+            <div class="input-row">
+              <div class="input-with-unit"><input type="number" id="r_ttMin" value="15" min="0" max="175" step="1"><span class="unit">° min</span></div>
+              <div class="input-with-unit"><input type="number" id="r_ttMax" value="75" min="5" max="180" step="1"><span class="unit">° max</span></div>
+            </div>
+            <div class="param-range">Typical: (10, 80) · must match measurement range</div>
+          </div>
+
+        </div>
+
+        <div class="sec-label c-blue" style="margin-top:1.6rem">X-ray Source Wavelength</div>
+        <div class="info-box ib-blue">
+          <strong>⚡ Select your X-ray source or enter custom wavelengths</strong>
+          The wavelength list [λ₁, λ₂] specifies the primary (Kα₁) and secondary (Kα₂) emission lines of your X-ray source in Ångströms. For synchrotron sources, enter the monochromatic wavelength as both values (or set λ₂ = λ₁).
+        </div>
+        <div class="wavelength-preset">
+          <button class="wl-btn active" onclick="setWavelength(1.540593,1.544414,this)">Cu Kα (1.5406 / 1.5444 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(0.709300,0.713590,this)">Mo Kα (0.7093 / 0.7136 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(1.788965,1.792850,this)">Co Kα (1.7890 / 1.7929 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(2.289760,2.293606,this)">Cr Kα (2.2898 / 2.2936 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(1.937355,1.941330,this)">Fe Kα (1.9374 / 1.9413 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(1.03,1.03,this)">Synchrotron (1.03 Å)</button>
+        </div>
+        <div class="param-grid" style="grid-template-columns:1fr 1fr">
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">wavelength[0]</span><span class="param-badge pb-req">λ₁ Kα₁</span></div>
+            <div class="param-label">Primary Wavelength (Kα₁)</div>
+            <div class="param-desc">Primary emission wavelength of the X-ray source in Ångströms. Kα₁ is the dominant, shorter-wavelength component and contributes the majority of the diffraction signal intensity.</div>
+            <div class="input-with-unit"><input type="number" id="r_wl1" value="1.540593" min="0.1" max="5" step="0.000001"><span class="unit">Å</span></div>
+          </div>
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">wavelength[1]</span><span class="param-badge pb-opt">λ₂ Kα₂</span></div>
+            <div class="param-label">Secondary Wavelength (Kα₂)</div>
+            <div class="param-desc">Secondary emission wavelength in Ångströms. Kα₂ is slightly longer and contributes ~50% of Kα₁ intensity, causing peak splitting at high angles. For monochromatic synchrotron sources, set equal to λ₁.</div>
+            <div class="input-with-unit"><input type="number" id="r_wl2" value="1.544414" min="0.1" max="5" step="0.000001"><span class="unit">Å</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /CIF panel -->
+
+    <!-- Lattice Constants Panel -->
+    <div class="panel open" id="panelLatt">
+      <div class="panel-hdr" onclick="togglePanel('panelLatt')">
+        <div class="ph-icon ic-amber"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div><div class="panel-title">Step 3 — Initial Lattice Constants</div><div class="panel-subtitle">Lattice_constants = [a, b, c, α, β, γ] — initial guess for WPEM refinement</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="crystal-select">
+          <label class="param-label-outer">Crystal System Constraint <span style="color:var(--txt3);font-size:.72rem">(auto-constrains angles)</span></label>
+          <select id="r_crystSys" onchange="applyCrystalConstraint()">
+            <option value="triclinic">Triclinic — a≠b≠c, α≠β≠γ≠90°</option>
+            <option value="monoclinic">Monoclinic — a≠b≠c, α=γ=90°, β≠90°</option>
+            <option value="orthorhombic">Orthorhombic — a≠b≠c, α=β=γ=90°</option>
+            <option value="tetragonal">Tetragonal — a=b≠c, α=β=γ=90°</option>
+            <option value="rhombohedral">Rhombohedral — a=b=c, α=β=γ≠90°</option>
+            <option value="hexagonal">Hexagonal — a=b≠c, α=β=90°, γ=120°</option>
+            <option value="cubic" selected>Cubic — a=b=c, α=β=γ=90°</option>
+          </select>
+          <div class="crystal-hint">💡 Select the crystal system so that symmetry-equivalent lattice parameters are automatically linked. The initial values below are read from the CIFpreprocess output or entered manually.</div>
+        </div>
+        <div class="latt-grid">
+          <div class="latt-item"><div class="latt-label">a <em>(Å)</em></div><div class="input-with-unit"><input type="number" id="la" value="9.41" min="0.1" step="0.001"><span class="unit">Å</span></div></div>
+          <div class="latt-item"><div class="latt-label">b <em>(Å)</em></div><div class="input-with-unit"><input type="number" id="lb" value="9.41" min="0.1" step="0.001"><span class="unit">Å</span></div></div>
+          <div class="latt-item"><div class="latt-label">c <em>(Å)</em></div><div class="input-with-unit"><input type="number" id="lc" value="9.41" min="0.1" step="0.001"><span class="unit">Å</span></div></div>
+          <div class="latt-item"><div class="latt-label">α <em>(°)</em></div><div class="input-with-unit"><input type="number" id="lalpha" value="90" min="1" max="179" step="0.01"><span class="unit">°</span></div></div>
+          <div class="latt-item"><div class="latt-label">β <em>(°)</em></div><div class="input-with-unit"><input type="number" id="lbeta" value="90" min="1" max="179" step="0.01"><span class="unit">°</span></div></div>
+          <div class="latt-item"><div class="latt-label">γ <em>(°)</em></div><div class="input-with-unit"><input type="number" id="lgamma" value="90" min="1" max="179" step="0.01"><span class="unit">°</span></div></div>
+        </div>
+      </div>
+    </div><!-- /Lattice panel -->
+
+    <!-- XRDfit Parameters Panel -->
+    <div class="panel open" id="panelXRDfit">
+      <div class="panel-hdr" onclick="togglePanel('panelXRDfit')">
+        <div class="ph-icon ic-teal"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="panel-title">Step 4 — XRDfit Refinement Parameters</div><div class="panel-subtitle">WPEM.XRDfit( wavelength, var, Lattice_constants, no_bac_file, original_file, bac_file, … )</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+
+        <div class="sec-label c-teal">Fitting Range &amp; Angular Window</div>
+        <div class="param-grid">
+
+          <!-- low_bound -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">low_bound</span><span class="param-badge pb-req">Required</span></div>
+            <div class="param-label">Lower 2θ Fitting Limit (°)</div>
+            <div class="param-desc">The minimum 2θ angle (degrees) included in the XRD profile fitting window. Peaks below this angle are excluded from the residual minimization. Should typically be set slightly above <code style="font-family:monospace;font-size:.85em">lowAngleRange</code> used in background processing, to avoid background artefacts entering the fit.</div>
+            <div class="input-with-unit"><input type="number" id="r_lowBound" value="20" min="0" max="170" step="1"><span class="unit">°</span></div>
+            <div class="param-range">Typical: 15 – 30° · must be &gt; lowAngleRange</div>
+          </div>
+
+          <!-- up_bound -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">up_bound</span><span class="param-badge pb-req">Required</span></div>
+            <div class="param-label">Upper 2θ Fitting Limit (°)</div>
+            <div class="param-desc">The maximum 2θ angle (degrees) for the fitting window. Should match or be slightly below the upper angular limit of your measured data. Higher angles provide more constraints on lattice parameters (d-spacing) but also amplify noise in laboratory diffractometers.</div>
+            <div class="input-with-unit"><input type="number" id="r_upBound" value="70" min="10" max="179" step="1"><span class="unit">°</span></div>
+            <div class="param-range">Typical: 60 – 120° · must be &lt; two_theta_range max</div>
+          </div>
+
+        </div>
+
+        <div class="sec-label c-teal" style="margin-top:1.4rem">WPEM Optimization Parameters</div>
+        <div class="param-grid">
+
+          <!-- subset_number -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">subset_number</span><span class="param-badge pb-opt">Optional</span></div>
+            <div class="param-label">WPEM Subset Count</div>
+            <div class="param-desc">Number of random sub-profiles sampled per EM iteration in the Expectation-Maximization algorithm. Larger values increase statistical robustness of the parameter update but require more memory and time per iteration. Equivalent to "mini-batch size" in machine learning terms.</div>
+            <input type="number" id="r_subsetN" value="11" min="1" max="200" step="1">
+            <div class="param-range">Range: 1 – 200 · Typical: 5 – 20</div>
+          </div>
+
+          <!-- iter_max -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">iter_max</span><span class="param-badge pb-opt">Optional</span></div>
+            <div class="param-label">Maximum EM Iterations</div>
+            <div class="param-desc">Maximum number of outer EM (Expectation-Maximization) cycles. Each iteration updates the lattice constants and peak shape parameters. WPEM terminates early if convergence is reached. Increase for complex multi-phase systems or heavily distorted structures.</div>
+            <input type="number" id="r_iterMax" value="5" min="1" max="500" step="1">
+            <div class="param-range">Range: 1 – 500 · Typical: 5 – 30</div>
+          </div>
+
+          <!-- bta -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">bta</span><span class="param-badge pb-opt">Optional</span></div>
+            <div class="param-label">EM Convergence Rate (β)</div>
+            <div class="param-desc">Controls the learning rate of the EM parameter update — analogous to the momentum parameter in optimization. Values closer to 1.0 give slower but more stable convergence; values closer to 0.5 converge faster but may oscillate. For noisy data, use higher β (0.85–0.95).</div>
+            <input type="number" id="r_bta" value="0.85" min="0.1" max="1.0" step="0.01">
+            <div class="param-range">Range: 0.1 – 1.0 · Typical: 0.75 – 0.95</div>
+          </div>
+
+          <!-- asy_C -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">asy_C</span><span class="param-badge pb-adv">Advanced</span></div>
+            <div class="param-label">Peak Asymmetry Coefficient</div>
+            <div class="param-desc">Correction coefficient for peak asymmetry caused by axial divergence of the diffractometer beam. Set to 0 for symmetric Voigt peaks (most cases). Positive values model low-angle asymmetry (peaks elongated toward lower 2θ). Relevant for high-resolution or high-count-rate measurements.</div>
+            <input type="number" id="r_asyC" value="0" min="-5" max="5" step="0.1">
+            <div class="param-range">Range: −5 to 5 · Default: 0 (symmetric)</div>
+          </div>
+
+          <!-- InitializationEpoch -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">InitializationEpoch</span><span class="param-badge pb-adv">Advanced</span></div>
+            <div class="param-label">Pre-Training Initialization Epochs</div>
+            <div class="param-desc">Number of neural-network pre-training epochs used to initialize the internal WPEM peak-shape model before the EM refinement begins. Setting this to 0 uses WPEM's built-in default Voigt initialization. Increase (e.g., 100–500) for complex peak shapes or when default initialization fails.</div>
+            <input type="number" id="r_initEpoch" value="0" min="0" max="5000" step="10">
+            <div class="param-range">Range: 0 – 5000 · Default: 0</div>
+          </div>
+
+          <!-- subset_number note -->
+          <div class="param-item" style="border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.04)">
+            <div class="param-top"><span class="param-name" style="color:var(--txt2)">Output Files</span></div>
+            <div class="param-label" style="color:var(--txt2)">Refinement Results Location</div>
+            <div class="param-desc">After refinement, results are saved in <code style="font-family:monospace">WPEMFittingResults/</code> folder:
+              <br>• <code style="font-family:monospace">CrystalSystem0_WPEMout.csv</code> — decomposed peak intensities
+              <br>• Refined lattice constants printed to console (Rp, Rwp, Rsquare metrics)
+              <br>• Fitting plots saved as PNG images</div>
+          </div>
+
+        </div>
+
+        <div class="action-bar">
+          <span class="action-hint">Review all parameters above · Click to generate the complete Python script</span>
+          <button class="btn btn-secondary btn-sm" onclick="resetRefParams()">
+            <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9M3 3v4h4"/></svg> Reset Defaults
+          </button>
+          <button class="btn btn-primary" onclick="generateRefCode()">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Generate Full Python Script
+          </button>
+        </div>
+      </div>
+    </div><!-- /XRDfit panel -->
+
+    <!-- Refinement Code Output -->
+    <div class="code-section" id="codeRef">
+      <div class="code-hdr">
+        <span class="code-lang">Python</span>
+        <span class="code-title">Complete XRD Refinement Script — CIFpreprocess + XRDfit</span>
+        <button class="copy-btn" onclick="copyCode('codeRefPre',this)">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+      <div class="code-box"><pre id="codeRefPre"></pre></div>
+      <div style="margin-top:.8rem" class="info-box ib-amber">
+        <strong>⚠️ Before Running</strong>
+        Ensure all four uploaded files are in the same directory as the script. After running CIFpreprocess, rename <code style="font-family:monospace">output_xrd/xxxHKL.csv</code> → <code style="font-family:monospace">peak0.csv</code> in the root directory. The full script performs both steps sequentially.
+      </div>
+    </div>
+
+  </div><!-- /tab-ref -->
+
+</div><!-- /wrap -->
+
+<script>
+/* ─────────────────────────────────────────────────────
+   TAB SWITCHING
+───────────────────────────────────────────────────── */
+function switchTab(t){
+  document.getElementById('tab-bac').style.display = t==='bac'?'block':'none';
+  document.getElementById('tab-ref').style.display = t==='ref'?'block':'none';
+  document.querySelectorAll('.tab').forEach(b=>{
+    b.classList.toggle('active', (t==='bac'&&b.classList.contains('t1'))||(t==='ref'&&b.classList.contains('t2')));
+  });
+}
+
+/* ─────────────────────────────────────────────────────
+   PANEL COLLAPSE
+───────────────────────────────────────────────────── */
+function togglePanel(id){
+  const p=document.getElementById(id);
+  p.classList.toggle('open');
+}
+
+/* ─────────────────────────────────────────────────────
+   DRAG & DROP
+───────────────────────────────────────────────────── */
+function handleDrag(e,id){e.preventDefault();document.getElementById(id).classList.add('drag');}
+function handleDragLeave(e,id){document.getElementById(id).classList.remove('drag');}
+function handleDrop(e,key){
+  e.preventDefault();
+  const map={bac:'fileBac',ri:'fileRI',bacf:'fileBacF',nb:'fileNB',cif:'fileCIF'};
+  const idMap={bac:'dropBac',ri:'dropRI',bacf:'dropBacF',nb:'dropNB',cif:'dropCIF'};
+  document.getElementById(idMap[key]).classList.remove('drag');
+  const files=e.dataTransfer.files;
+  if(files.length){
+    const dt=new DataTransfer();
+    dt.items.add(files[0]);
+    document.getElementById(map[key]).files=dt.files;
+    handleFileSelect(key);
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   FILE VALIDATION
+───────────────────────────────────────────────────── */
+const fileData={};
+
+function handleFileSelect(key){
+  const idMap={bac:'fileBac',ri:'fileRI',bacf:'fileBacF',nb:'fileNB',cif:'fileCIF'};
+  const statusMap={bac:'statusBac',ri:'statusRI',bacf:'statusBacF',nb:'statusNB',cif:'statusCIF'};
+  const inp=document.getElementById(idMap[key]);
+  if(!inp.files||!inp.files[0])return;
+  const file=inp.files[0];
+  const statusEl=document.getElementById(statusMap[key]);
+  statusEl.className='file-status show';
+
+  if(key==='cif'){
+    validateCIF(file,statusEl,key);
+  } else {
+    validateCSV(file,statusEl,key);
+  }
+}
+
+function svgOk(){return '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';}
+function svgErr(){return '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';}
+
+function validateCIF(file,el,key){
+  if(!file.name.toLowerCase().endsWith('.cif')){
+    el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>Invalid file type</strong> — Please upload a .cif file (Crystallographic Information File)</div></div>`;
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const txt=e.target.result;
+    const hasCIF=txt.includes('_cell_length_a')||txt.includes('data_')||txt.includes('_atom_site');
+    if(!hasCIF){
+      el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>CIF format not recognized</strong> — File does not appear to be a valid CIF. Missing standard CIF keywords. Please check the file source.</div></div>`;
+      return;
+    }
+    // try to extract cell param
+    const match=txt.match(/_cell_length_a\s+([\d.]+)/);
+    let extra='';
+    if(match) extra=` · a = ${parseFloat(match[1]).toFixed(4)} Å`;
+    // update CIF name field
+    document.getElementById('r_cifName').value=file.name;
+    fileData[key]=true;
+    el.innerHTML=`<div class="file-ok">${svgOk()}<div><strong>${file.name}</strong> validated — CIF structure file detected${extra}. Size: ${(file.size/1024).toFixed(1)} KB</div></div>`;
+  };
+  reader.readAsText(file);
+}
+
+function validateCSV(file,el,key){
+  // Extension check
+  const ext=file.name.split('.').pop().toLowerCase();
+  if(!['csv','txt','dat'].includes(ext)){
+    el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>Unsupported file type (.${ext})</strong> — Please upload a .csv, .txt, or .dat file with 2θ and intensity columns.</div></div>`;
+    return;
+  }
+  if(file.size>50*1024*1024){
+    el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>File too large (${(file.size/1024/1024).toFixed(1)} MB)</strong> — Maximum supported size is 50 MB.</div></div>`;
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const lines=e.target.result.split('\n').filter(l=>l.trim());
+    if(lines.length<5){el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>Too few data rows (${lines.length})</strong> — Minimum 5 data points required.</div></div>`;return;}
+    // detect delimiter
+    const sample=lines[0].trim();
+    const delim=sample.includes(',')?',':(/\t/.test(sample)?'\t':' ');
+    const errors=[];let cols0=null;
+    const previewRows=[];
+    let thetaMin=Infinity,thetaMax=-Infinity,intMin=Infinity,intMax=-Infinity;
+    for(let i=0;i<Math.min(lines.length,500);i++){
+      const parts=lines[i].trim().split(delim).map(p=>p.trim()).filter(p=>p!=='');
+      if(i===0){cols0=parts.length;}
+      if(parts.length<2){errors.push(`Row ${i+1}: fewer than 2 columns (found ${parts.length})`);if(errors.length>3)break;continue;}
+      if(parts.length!==cols0)errors.push(`Row ${i+1}: column count mismatch`);
+      const th=parseFloat(parts[0]),it=parseFloat(parts[1]);
+      if(isNaN(th))errors.push(`Row ${i+1}: 2θ value "${parts[0]}" is not a number`);
+      if(isNaN(it))errors.push(`Row ${i+1}: intensity "${parts[1]}" is not a number`);
+      if(!isNaN(th)&&!isNaN(it)){
+        if(th<thetaMin)thetaMin=th;if(th>thetaMax)thetaMax=th;
+        if(it<intMin)intMin=it;if(it>intMax)intMax=it;
+        if(i<6)previewRows.push([i+1,th.toFixed(4),it.toFixed(2)]);
+      }
+      if(errors.length>5)break;
+    }
+    if(errors.length){
+      el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>Validation errors found:</strong><ul style="margin:.3rem 0 0 1rem">${errors.slice(0,5).map(e=>`<li>${e}</li>`).join('')}${errors.length>5?`<li>… and ${errors.length-5} more</li>`:''}</ul></div></div>`;
+      return;
+    }
+    if(thetaMin<0||thetaMax>180){errors.push(`2θ range [${thetaMin.toFixed(2)}, ${thetaMax.toFixed(2)}°] out of physical range [0°, 180°]`);}
+    if(intMin<0){errors.push(`Negative intensity values detected (min: ${intMin.toFixed(2)}) — check data sign`);}
+    if(errors.length){el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>Data quality warning:</strong><ul style="margin:.3rem 0 0 1rem">${errors.map(e=>`<li>${e}</li>`).join('')}</ul></div></div>`;return;}
+    fileData[key]={rows:lines.length,thetaMin,thetaMax,intMin,intMax};
+    el.innerHTML=`<div class="file-ok">${svgOk()}<div><strong>${file.name}</strong> · ${lines.length} rows · 2θ: ${thetaMin.toFixed(2)}°–${thetaMax.toFixed(2)}° · Intensity: ${intMin.toFixed(0)}–${intMax.toFixed(0)}</div></div>`;
+    if(key==='bac'){showPreview(previewRows,thetaMin,thetaMax,lines.length);}
+  };
+  reader.readAsText(file);
+}
+
+function showPreview(rows,tMin,tMax,total){
+  const el=document.getElementById('previewBac');
+  const tbody=document.getElementById('previewBacBody');
+  document.getElementById('previewBacInfo').textContent=`Total: ${total} rows · 2θ ${tMin.toFixed(2)}°–${tMax.toFixed(2)}°`;
+  tbody.innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+  el.classList.add('show');
+}
+</script>
+
+<script>
+/* ─────────────────────────────────────────────────────
+   WAVELENGTH PRESETS
+───────────────────────────────────────────────────── */
+function setWavelength(l1,l2,btn){
+  document.getElementById('r_wl1').value=l1;
+  document.getElementById('r_wl2').value=l2;
+  document.querySelectorAll('.wl-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ─────────────────────────────────────────────────────
+   CRYSTAL SYSTEM CONSTRAINTS
+───────────────────────────────────────────────────── */
+function applyCrystalConstraint(){
+  const sys=document.getElementById('r_crystSys').value;
+  const a=document.getElementById('la'),b=document.getElementById('lb'),c=document.getElementById('lc');
+  const alpha=document.getElementById('lalpha'),beta=document.getElementById('lbeta'),gamma=document.getElementById('lgamma');
+  // Reset disabled
+  [a,b,c,alpha,beta,gamma].forEach(el=>{el.disabled=false;el.style.opacity='1';});
+  const lock=(el,val)=>{el.value=val;el.disabled=true;el.style.opacity='.5';};
+  const sync=(src,tgt)=>{tgt.value=src.value;tgt.disabled=true;tgt.style.opacity='.5';};
+  if(sys==='cubic'){sync(a,b);sync(a,c);lock(alpha,90);lock(beta,90);lock(gamma,90);}
+  else if(sys==='tetragonal'){sync(a,b);lock(alpha,90);lock(beta,90);lock(gamma,90);}
+  else if(sys==='orthorhombic'){lock(alpha,90);lock(beta,90);lock(gamma,90);}
+  else if(sys==='hexagonal'){sync(a,b);lock(alpha,90);lock(beta,90);lock(gamma,120);}
+  else if(sys==='rhombohedral'){sync(a,b);sync(a,c);}
+  else if(sys==='monoclinic'){lock(alpha,90);lock(gamma,90);}
+  // triclinic: all free
+}
+
+// sync cubic a→b,c on input
+document.addEventListener('DOMContentLoaded',()=>{
+  ['la'].forEach(id=>{
+    document.getElementById(id).addEventListener('input',function(){
+      const sys=document.getElementById('r_crystSys').value;
+      if(sys==='cubic'){document.getElementById('lb').value=this.value;document.getElementById('lc').value=this.value;}
+      else if(sys==='tetragonal'){document.getElementById('lb').value=this.value;}
+      else if(sys==='hexagonal'||sys==='rhombohedral'){document.getElementById('lb').value=this.value;if(sys==='rhombohedral')document.getElementById('lc').value=this.value;}
+    });
+  });
+  applyCrystalConstraint();
+});
+
+/* ─────────────────────────────────────────────────────
+   RESET DEFAULTS
+───────────────────────────────────────────────────── */
+function resetBacParams(){
+  document.getElementById('b_lowAngle').value=17;
+  document.getElementById('b_polyN').value=13;
+  document.getElementById('b_bacSplit').value=16;
+  document.getElementById('b_bacNum').value=300;
+}
+function resetRefParams(){
+  document.getElementById('r_lowBound').value=20;
+  document.getElementById('r_upBound').value=70;
+  document.getElementById('r_subsetN').value=11;
+  document.getElementById('r_iterMax').value=5;
+  document.getElementById('r_bta').value=0.85;
+  document.getElementById('r_asyC').value=0;
+  document.getElementById('r_initEpoch').value=0;
+  document.getElementById('r_wl1').value=1.540593;
+  document.getElementById('r_wl2').value=1.544414;
+  document.getElementById('r_crystSys').value='cubic';
+  document.getElementById('la').value=9.41;
+  applyCrystalConstraint();
+  setWavelength(1.540593,1.544414,document.querySelector('.wl-btn'));
+}
+
+/* ─────────────────────────────────────────────────────
+   COPY CODE
+───────────────────────────────────────────────────── */
+function copyCode(preId,btn){
+  const txt=document.getElementById(preId).textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.innerHTML;
+    btn.innerHTML=`<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML=orig;btn.classList.remove('copied');},2200);
+  });
+}
+
+/* ─────────────────────────────────────────────────────
+   SYNTAX HIGHLIGHT HELPER
+───────────────────────────────────────────────────── */
+function hl(code){
+  return code
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    // Comments
+    .replace(/(#[^\n]*)/g,'<span class="cm">$1</span>')
+    // Strings
+    .replace(/(&#39;[^&#39;]*&#39;|&quot;[^&quot;]*&quot;)/g,'<span class="st">$1</span>')
+    // Keywords
+    .replace(/\b(from|import|as|True|False|None)\b/g,'<span class="kw">$1</span>')
+    // Functions/methods
+    .replace(/\b(BackgroundFit|CIFpreprocess|XRDfit|read_csv|print)\b/g,'<span class="fn">$1</span>')
+    // Numbers
+    .replace(/\b(\d+\.?\d*)\b/g,'<span class="nm">$1</span>')
+    // Builtins
+    .replace(/\b(pd|WPEM|np)\b/g,'<span class="nb">$1</span>');
+}
+
+/* ─────────────────────────────────────────────────────
+   GENERATE BACKGROUND FIT CODE
+───────────────────────────────────────────────────── */
+function generateBacCode(){
+  const lowAngle = document.getElementById('b_lowAngle').value;
+  const polyN    = document.getElementById('b_polyN').value;
+  const bacSplit = document.getElementById('b_bacSplit').value;
+  const bacNum   = document.getElementById('b_bacNum').value;
+
+  const code = `# ============================================================
+#  PyXplore · BackgroundFit Script
+#  Generated by RefineUI · https://github.com/Bin-Cao/PyWPEM
+# ============================================================
+
+# Step 1 — Import dependencies
+from PyXplore import WPEM
+import pandas as pd
+
+# Step 2 — Load raw XRD data
+#   File format: 2 columns, no header
+#   Column 1 = 2θ (degrees), Column 2 = Intensity
+intensity_csv = pd.read_csv(r'intensity.csv', header=None)
+
+# Step 3 — Run background fitting
+#   Parameters:
+#     intensity_csv  : DataFrame with [2θ, Intensity] columns
+#     lowAngleRange  : Min 2θ included in fit = ${lowAngle}°
+#                      (excludes low-angle scatter artefacts)
+#     poly_n         : Polynomial degree = ${polyN}
+#                      (higher → more flexible background curve)
+#     bac_split      : Background anchor segments = ${bacSplit}
+#                      (piecewise regions for baseline definition)
+#     bac_num        : Monte Carlo optimization steps = ${bacNum}
+#                      (more steps → better fit, slower computation)
+var = WPEM.BackgroundFit(
+    intensity_csv,
+    lowAngleRange=${lowAngle},
+    poly_n=${polyN},
+    bac_split=${bacSplit},
+    bac_num=${bacNum}
+)
+
+# Step 4 — Output
+#   After running, 'ConvertedDocuments/' folder is created.
+#   Copy these 2 files to your working directory:
+#     - ConvertedDocuments/bac.csv             (background curve)
+#     - ConvertedDocuments/no_bac_intensity.csv (subtracted data)
+
+print("Background processing complete.")
+print("Next: copy bac.csv and no_bac_intensity.csv to your root directory.")
+`;
+  const pre=document.getElementById('codeBacPre');
+  pre.innerHTML=hl(code);
+  const sec=document.getElementById('codeBac');
+  sec.classList.add('show');
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+
+<script>
+/* ─────────────────────────────────────────────────────
+   GENERATE REFINEMENT CODE
+───────────────────────────────────────────────────── */
+function generateRefCode(){
+  const cifName   = document.getElementById('r_cifName').value||'Structure.cif';
+  const ttMin     = document.getElementById('r_ttMin').value;
+  const ttMax     = document.getElementById('r_ttMax').value;
+  const wl1       = document.getElementById('r_wl1').value;
+  const wl2       = document.getElementById('r_wl2').value;
+  const la        = document.getElementById('la').value;
+  const lb        = document.getElementById('lb').value;
+  const lc        = document.getElementById('lc').value;
+  const lalpha    = document.getElementById('lalpha').value;
+  const lbeta     = document.getElementById('lbeta').value;
+  const lgamma    = document.getElementById('lgamma').value;
+  const lowBound  = document.getElementById('r_lowBound').value;
+  const upBound   = document.getElementById('r_upBound').value;
+  const subsetN   = document.getElementById('r_subsetN').value;
+  const iterMax   = document.getElementById('r_iterMax').value;
+  const bta       = document.getElementById('r_bta').value;
+  const asyC      = document.getElementById('r_asyC').value;
+  const initEp    = document.getElementById('r_initEpoch').value;
+  const cifBase   = cifName.replace('.cif','');
+
+  // Read BackgroundFit params from the background tab (share the DOM)
+  const bacLowAngle = (document.getElementById('b_lowAngle')||{value:'17'}).value;
+  const bacPolyN    = (document.getElementById('b_polyN')||{value:'13'}).value;
+  const bacSplit    = (document.getElementById('b_bacSplit')||{value:'16'}).value;
+  const bacNum      = (document.getElementById('b_bacNum')||{value:'300'}).value;
+  const crystSys    = document.getElementById('r_crystSys');
+  const crystLabel  = crystSys ? crystSys.options[crystSys.selectedIndex].text.split('\u2014')[0].trim() : 'Cubic';
+
+  const code = `# ============================================================
+#  PyXplore \u00b7 Complete XRD Refinement Script
+#  Generated by RefineUI \u00b7 https://github.com/Bin-Cao/PyWPEM
+# ============================================================
+#
+#  Workflow:
+#    Phase 1  \u2014 Background Processing  (WPEM.BackgroundFit)
+#    Phase 2  \u2014 CIF Preprocessing     (WPEM.CIFpreprocess)
+#    Manual   \u2014 Copy HKL \u2192 peak0.csv  (see instructions below)
+#    Phase 3  \u2014 XRD Refinement        (WPEM.XRDfit)
+#
+#  File layout (all files must be in the SAME directory as this script):
+#    intensity.csv          \u2014 your raw XRD measurement
+#    ${cifName}  \u2014 reference crystal structure (from ICSD/COD)
+# ============================================================
+
+# Step 1 \u2014 Import dependencies
+from PyXplore import WPEM
+import pandas as pd
+import shutil, glob
+
+# \u2500\u2500\u2500 PHASE 1: BACKGROUND PROCESSING \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+# Step 2 \u2014 Load raw XRD data and fit the background
+#
+#   File format  : 2 columns, no header row
+#                  Column 1 = 2\u03b8 (degrees)  |  Column 2 = Intensity
+#
+#   lowAngleRange : Min 2\u03b8 included in background fit = ${bacLowAngle}\u00b0
+#                   (excludes low-angle air-scatter artefacts)
+#   poly_n        : Polynomial degree for background curve = ${bacPolyN}
+#                   (higher \u2192 more flexible; use 8\u201310 for crystalline,
+#                    10\u201315 for amorphous-rich samples)
+#   bac_split     : Piecewise anchor segment count = ${bacSplit}
+#                   (more segments \u2192 more local background control)
+#   bac_num       : Monte Carlo optimization steps = ${bacNum}
+#                   (more steps \u2192 better convergence, slower run)
+#
+#   \u26a0\ufe0f  Output: creates 'ConvertedDocuments/' folder.
+#   After running, copy these files to this directory:
+#     ConvertedDocuments/bac.csv              \u2192  bac.csv
+#     ConvertedDocuments/no_bac_intensity.csv \u2192  no_bac_intensity.csv
+intensity_csv = pd.read_csv(r'intensity.csv', header=None)
+var = WPEM.BackgroundFit(
+    intensity_csv,
+    lowAngleRange=${bacLowAngle},
+    poly_n=${bacPolyN},
+    bac_split=${bacSplit},
+    bac_num=${bacNum}
+)
+
+# Copy output files to the working directory
+shutil.copy('ConvertedDocuments/bac.csv', 'bac.csv')
+shutil.copy('ConvertedDocuments/no_bac_intensity.csv', 'no_bac_intensity.csv')
+print("Background files copied to working directory.")
+
+# \u2500\u2500\u2500 PHASE 2: CIF PREPROCESSING \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+# Step 3 \u2014 Parse reference CIF and generate indexed HKL peak list
+#
+#   filepath        : '${cifName}' \u2014 place in this directory
+#   two_theta_range : (${ttMin}, ${ttMax})\u00b0 \u2014 angular window for peak generation
+#                     must match or slightly exceed your measurement range
+#
+#   Returns:
+#     latt            : Initial lattice constants [a, b, c, \u03b1, \u03b2, \u03b3]
+#                       Crystal system: ${crystLabel}
+#                       Typical: [${la}, ${lb}, ${lc}, ${lalpha}, ${lbeta}, ${lgamma}]
+#     AtomCoordinates : Fractional atomic coordinates from CIF
+#     des             : Crystal system description string
+#
+#   \u26a0\ufe0f  Output: creates 'output_xrd/' folder containing xxxHKL.csv.
+latt, AtomCoordinates, des = WPEM.CIFpreprocess(
+    filepath='${cifName}',
+    two_theta_range=(${ttMin}, ${ttMax})
+)
+
+print(f"Crystal system : {des}")
+print(f"Lattice constants from CIF : {latt}")
+
+# \u2500\u2500\u2500 MANUAL STEP: Copy HKL file \u2192 peak0.csv \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+# After CIFpreprocess, locate output_xrd/${cifBase}HKL.csv
+# The block below copies and renames it to peak0.csv automatically.
+hkl_files = glob.glob('output_xrd/*HKL.csv')
+if not hkl_files:
+    raise FileNotFoundError(
+        "No HKL file found in output_xrd/. "
+        "Ensure CIFpreprocess ran successfully."
+    )
+shutil.copy(hkl_files[0], 'peak0.csv')
+print(f"Copied {hkl_files[0]} \u2192 peak0.csv \u2713")
+
+# \u2500\u2500\u2500 PHASE 3: XRD REFINEMENT \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+# Step 4 \u2014 Run WPEM XRD lattice constant refinement
+#
+#   wavelength          : [K\u03b1\u2081, K\u03b1\u2082] in \u00c5ngstr\u00f6ms
+#   var                 : BackgroundFit result object (from Phase 1)
+#   Lattice_constants   : [latt] \u2014 initial lattice params from CIFpreprocess
+#   no_bac_intensity_file : Background-subtracted data file
+#   original_file       : Raw XRD data file
+#   background_file     : Fitted background data file
+#   subset_number       : WPEM EM subset size (mini-batch) = ${subsetN}
+#   low_bound           : Lower 2\u03b8 fitting limit = ${lowBound}\u00b0
+#   up_bound            : Upper 2\u03b8 fitting limit = ${upBound}\u00b0
+#   bta                 : EM convergence rate \u03b2 = ${bta}
+#                         (0.1 = fast/unstable  \u2014  1.0 = slow/stable)
+#   iter_max            : Maximum EM iterations = ${iterMax}
+#   asy_C               : Peak asymmetry coefficient = ${asyC}
+#                         (0 = symmetric Voigt peak; >0 = low-angle tail)
+#   InitializationEpoch : NN pre-training epochs = ${initEp}
+#                         (0 = WPEM default Voigt initialization)
+
+wavelength            = [${wl1}, ${wl2}]
+no_bac_intensity_file = 'no_bac_intensity.csv'
+original_file         = 'intensity.csv'
+background_file       = 'bac.csv'
+Lattice_constants     = [latt,]          # from CIFpreprocess
+
+runtime, refined_latt = WPEM.XRDfit(
+    wavelength, var, Lattice_constants,
+    no_bac_intensity_file, original_file, background_file,
+    subset_number=${subsetN},
+    low_bound=${lowBound},
+    up_bound=${upBound},
+    bta=${bta},
+    iter_max=${iterMax},
+    asy_C=${asyC},
+    InitializationEpoch=${initEp},
+)
+
+# Step 5 \u2014 Results summary
+print(f"\\nRefinement completed in : {runtime}")
+print(f"Refined lattice constants : {refined_latt}")
+print("Results saved in         : WPEMFittingResults/")
+print("  \u2022 CrystalSystem0_WPEMout.csv \u2014 decomposed peak intensities")
+print("  \u2022 Fitting plots saved as PNG images")
+`;
+  const pre=document.getElementById('codeRefPre');
+  pre.innerHTML=hl(code);
+  const sec=document.getElementById('codeRef');
+  sec.classList.add('show');
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+<footer style="border-top:1px solid var(--border);padding:1.4rem 2rem;text-align:center;font-size:.76rem;color:var(--txt3);position:relative;z-index:1">
+  RefineUI · PyXplore WPEM Toolkit &nbsp;·&nbsp;
+  <a href="https://bin-cao.github.io/" target="_blank" style="color:var(--txt2);text-decoration:none">Bin CAO</a>
+  &nbsp;·&nbsp; HKUST(GZ) | CityU HK &nbsp;·&nbsp; © 2024–2026
+</footer>
+
+
+
+</body>
+</html>

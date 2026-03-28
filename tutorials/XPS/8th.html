@@ -1,0 +1,1189 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The tutorial 8th &#8212; PyXplore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/XPS/8th';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="The tutorial 7th" href="../EXAFS/7th.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PyXplore - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PyXplore - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../parameter.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resultsFiles.html">Output Files</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorial Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_opt/1st.html">The tutorial 1st</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_phases/2nd.html">The tutorial 2nd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../amorphous/3rd.html">The tutorial 3rd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/4th.html">The tutorial 4th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../atomic_dis/5th.html">The tutorial 5th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solid_solution/6th.html">The tutorial 6th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EXAFS/7th.html">The tutorial 7th</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">The tutorial 8th</a></li>
+</ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/PyWPEM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/PyWPEM/issues/new?title=Issue%20on%20page%20%2Ftutorials/XPS/8th.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/XPS/8th.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The tutorial 8th</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">coding</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-tutorial-8th">
+<h1>The tutorial 8th<a class="headerlink" href="#the-tutorial-8th" title="Link to this heading">#</a></h1>
+<p>Describes how PyXplore processes X-ray photoelectron spectroscopy (XPS) data.</p>
+<section id="coding">
+<h2>coding<a class="headerlink" href="#coding" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>1. Save your XPS data to the root directory and rename the file to <code class="docutils literal notranslate"><span class="pre">int.csv</span></code>.</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import PyXplore package</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyXplore</span><span class="w"> </span><span class="kn">import</span> <span class="n">WPEM</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>██╗    ██╗██████╗ ███████╗███╗   ███╗
+██║    ██║██╔══██╗██╔════╝████╗ ████║
+██║ █╗ ██║██████╔╝█████╗  ██╔████╔██║
+██║███╗██║██╔═══╝ ██╔══╝  ██║╚██╔╝██║
+╚███╔███╔╝██║     ███████╗██║ ╚═╝ ██║
+ ╚══╝╚══╝ ╚═╝     ╚══════╝╚═╝     ╚═╝                                                  
+
+A Diffraction Refinement Software : WPEM
+Bin Cao, Advanced Materials Thrust, Hong Kong University of Science and Technology (Guangzhou)
+URL : https://github.com/Bin-Cao/WPEM
+Executed on : 2026-01-30 19:51:21  | Have a great day.
+====================================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>2. Parse your diffraction data (<code class="docutils literal notranslate"><span class="pre">bing</span> <span class="pre">energy</span></code>, intensity) and perform background processing.</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intensity_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;int.csv&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span> <span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">WPEM</span><span class="o">.</span><span class="n">BackgroundFit</span><span class="p">(</span><span class="n">intensity_csv</span><span class="p">,</span><span class="n">segement</span><span class="o">=</span><span class="p">[[</span><span class="mi">910</span><span class="p">,</span><span class="mi">931</span><span class="p">],[</span><span class="mi">948</span><span class="p">,</span><span class="mi">952</span><span class="p">],[</span><span class="mi">958</span><span class="p">,</span><span class="mi">959</span><span class="p">],[</span><span class="mi">966</span><span class="p">,</span><span class="mi">970</span><span class="p">]],</span><span class="n">bac_num</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span><span class="n">Model</span><span class="o">=</span><span class="s1">&#39;XPS&#39;</span><span class="p">,</span><span class="n">noise</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span><span class="n">bac_var_type</span><span class="o">=</span><span class="s1">&#39;multivariate gaussian&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9a72e2a8dccbcf64abfeb8a2eab9fa988629866dce60f476adac1acee635b9c7.png" src="../../_images/9a72e2a8dccbcf64abfeb8a2eab9fa988629866dce60f476adac1acee635b9c7.png" />
+<img alt="../../_images/a7d040a67d12e14e2a70047ab928c73da14f75827fb366f931965173a18ff060.png" src="../../_images/a7d040a67d12e14e2a70047ab928c73da14f75827fb366f931965173a18ff060.png" />
+<img alt="../../_images/d787df8081dcd8cf12cefc99637d7a8d3e1b3204bf8edf07912ac1c716a7771d.png" src="../../_images/d787df8081dcd8cf12cefc99637d7a8d3e1b3204bf8edf07912ac1c716a7771d.png" />
+<img alt="../../_images/60c6db4eaa2cab53d24386ec1b18c1a9bea706b82bb6b2710ff4247625087ac7.png" src="../../_images/60c6db4eaa2cab53d24386ec1b18c1a9bea706b82bb6b2710ff4247625087ac7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>3. After running the code, a new folder named <code class="docutils literal notranslate"><span class="pre">ConvertedDocuments</span></code> will be created in the root directory. This folder contains the background information.</strong></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Copy the two important files — <code class="docutils literal notranslate"><span class="pre">bac.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">no_bac_intensity.csv</span></code> — from <code class="docutils literal notranslate"><span class="pre">ConvertedDocuments</span></code> into the root directory, as they are required for the next steps.</strong></p>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>A key difference with XPS is that the initial binding energy needs to be queried and input using two parameters: <code class="docutils literal notranslate"><span class="pre">AtomIdentifier</span></code> and <code class="docutils literal notranslate"><span class="pre">satellitePeaks</span></code>.**</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AtomIdentifier</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;CuII&#39;</span><span class="p">,</span><span class="s1">&#39;2p3/2&#39;</span><span class="p">,</span><span class="mf">933.7</span><span class="p">,],[</span><span class="s1">&#39;CuII&#39;</span><span class="p">,</span><span class="s1">&#39;2p1/2&#39;</span><span class="p">,</span><span class="mi">954</span><span class="p">,],]</span>
+<span class="n">satellitePeaks</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;CuII&#39;</span><span class="p">,</span> <span class="s1">&#39;2p3/2&#39;</span><span class="p">,</span><span class="mf">941.6</span><span class="p">,],[</span><span class="s1">&#39;CuII&#39;</span><span class="p">,</span><span class="s1">&#39;2p3/2&#39;</span><span class="p">,</span><span class="mf">943.4</span><span class="p">],[</span><span class="s1">&#39;CuII&#39;</span><span class="p">,</span><span class="s1">&#39;2p1/2&#39;</span><span class="p">,</span><span class="mf">962.5</span><span class="p">,],]</span>
+<span class="c1"># The file name of non-background data </span>
+<span class="n">no_bac_intensity_file</span> <span class="o">=</span> <span class="s2">&quot;no_bac_intensity.csv&quot;</span> 
+<span class="c1"># The file name of raw/original data </span>
+<span class="n">original_file</span> <span class="o">=</span> <span class="s2">&quot;int.csv&quot;</span>  
+<span class="c1"># The file name of background data </span>
+<span class="n">bacground_file</span> <span class="o">=</span> <span class="s2">&quot;bac.csv&quot;</span>  
+
+<span class="c1"># Execute the model</span>
+<span class="n">WPEM</span><span class="o">.</span><span class="n">XPSfit</span><span class="p">(</span>
+        <span class="n">var</span><span class="p">,</span> <span class="n">AtomIdentifier</span><span class="p">,</span> <span class="n">satellitePeaks</span><span class="p">,</span><span class="n">no_bac_intensity_file</span><span class="p">,</span> <span class="n">original_file</span><span class="p">,</span> <span class="n">bacground_file</span><span class="p">,</span> 
+    <span class="n">bta</span> <span class="o">=</span> <span class="mf">0.80</span><span class="p">,</span><span class="n">iter_max</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Started at Fri Jan 30 19:51:27 2026 
+
+Initialization
+--------------------------------------------------------------------------------
+
+
+—————————— Initilize the parameters by WPEM ——————————
+Parameters of XPS are initialized has been completed 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                    | 0/50 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8%|███▌                                        | 4/50 [00:00&lt;00:01, 39.68it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 0-th iteration
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.7, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 954, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.6], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.4], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.5]]]
+Rp:45.523 | Rwp:51.131 | Rsquare:287.228
+
+
+WPEM 1-th iteration
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.7, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 954, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.6], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.4], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.5]]]
+Rp:45.938 | Rwp:51.811 | Rsquare:294.326
+
+
+WPEM 2-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.799
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5567944942568406
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.882, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.956, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.462], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.371], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.385]]]
+Rp:46.259 | Rwp:52.489 | Rsquare:301.292
+
+
+WPEM 3-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.795
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5493864287697079
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.89, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.951, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.494], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.403], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.384]]]
+Rp:46.344 | Rwp:52.587 | Rsquare:302.297
+
+
+WPEM 4-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.793
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5472711772701394
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.895, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.95, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.493], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.427], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.382]]]
+Rp:46.408 | Rwp:52.650 | Rsquare:303.038
+
+
+WPEM 5-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.792
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.546155096073957
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.898, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.95, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.491], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.444], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.38]]]
+Rp:46.461 | Rwp:52.699 | Rsquare:303.633
+
+
+WPEM 6-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.79
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5454956959926958
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.904, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.949, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.488], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.456], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.377]]]
+Rp:46.505 | Rwp:52.739 | Rsquare:304.134
+
+
+WPEM 7-th iteration
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Under the central field approximation, the effective charge of CuII is:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|███████▉                                    | 9/50 [00:00&lt;00:01, 40.04it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25.789
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5451827544054262
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.907, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.95, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.484], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.465], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.375]]]
+Rp:46.544 | Rwp:52.777 | Rsquare:304.591
+
+
+WPEM 8-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.788
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5451634921635551
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.911, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.95, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.481], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.471], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.372]]]
+Rp:46.580 | Rwp:52.811 | Rsquare:305.005
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|████████████                               | 14/50 [00:00&lt;00:00, 40.40it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 9-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.788
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5453921338017769
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.913, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.952, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.478], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.475], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.369]]]
+Rp:46.613 | Rwp:52.844 | Rsquare:305.400
+
+
+WPEM 10-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.787
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5458271150863314
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.916, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.953, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.475], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.478], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.366]]]
+Rp:46.642 | Rwp:52.873 | Rsquare:305.753
+
+
+WPEM 11-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.786
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5464314126562455
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.92, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.953, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.472], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.481], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.363]]]
+Rp:46.669 | Rwp:52.900 | Rsquare:306.083
+
+
+WPEM 12-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.785
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5471734006441921
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.923, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.953, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.469], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.482], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.36]]]
+Rp:46.694 | Rwp:52.926 | Rsquare:306.393
+
+
+WPEM 13-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.785
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5480263287264948
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.925, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.955, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.467], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.484], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.358]]]
+Rp:46.719 | Rwp:52.951 | Rsquare:306.698
+
+
+WPEM 14-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.784
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5489679638914116
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.929, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.956, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.465], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.484], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.355]]]
+Rp:46.742 | Rwp:52.974 | Rsquare:306.972
+
+
+WPEM 15-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.784
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5499791639996481
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.93, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.958, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.463], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.485], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.352]]]
+Rp:46.765 | Rwp:52.997 | Rsquare:307.245
+
+
+WPEM 16-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.783
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5510444226206037
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.934, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.958, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.461], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.486], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.349]]]
+Rp:46.786 | Rwp:53.017 | Rsquare:307.489
+
+
+WPEM 17-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.783
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5521503490396586
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.936, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.96, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.459], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.486], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.346]]]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:46.807 | Rwp:53.037 | Rsquare:307.734
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|████████████████▎                          | 19/50 [00:00&lt;00:00, 40.80it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 18-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.782
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5532863008297899
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.939, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.96, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.458], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.486], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.343]]]
+Rp:46.825 | Rwp:53.055 | Rsquare:307.952
+
+
+WPEM 19-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.782
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5544429415618155
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.941, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.962, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.457], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.486], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.341]]]
+Rp:46.844 | Rwp:53.072 | Rsquare:308.171
+
+
+WPEM 20-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.781
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.555613074431947
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.944, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.962, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.456], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.486], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.338]]]
+Rp:46.860 | Rwp:53.088 | Rsquare:308.365
+
+
+WPEM 21-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.781
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5567901839116616
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.946, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.964, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.455], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.485], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.336]]]
+Rp:46.877 | Rwp:53.104 | Rsquare:308.561
+
+
+WPEM 22-th iteration
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████████████████████▋                      | 24/50 [00:00&lt;00:00, 40.75it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Under the central field approximation, the effective charge of CuII is: 25.781
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.557969499145315
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.948, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.966, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.454], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.485], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.333]]]
+Rp:46.893 | Rwp:53.119 | Rsquare:308.747
+
+
+WPEM 23-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.78
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5591467458468962
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.951, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.966, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.453], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.485], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.331]]]
+Rp:46.907 | Rwp:53.131 | Rsquare:308.908
+
+
+WPEM 24-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.78
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5603181176256709
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.953, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.967, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.452], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.484], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.328]]]
+Rp:46.921 | Rwp:53.144 | Rsquare:309.075
+
+
+WPEM 25-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.78
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5614811413142897
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.954, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.969, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.451], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.484], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.326]]]
+Rp:46.935 | Rwp:53.156 | Rsquare:309.232
+
+
+WPEM 26-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.779
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.562633440628492
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.957, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.969, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.451], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.483], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.324]]]
+Rp:46.946 | Rwp:53.167 | Rsquare:309.365
+
+
+WPEM 27-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.779
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5637727599829994
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.959, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.971, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.45], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.482], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.322]]]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:46.959 | Rwp:53.177 | Rsquare:309.506
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|████████████████████████▉                  | 29/50 [00:00&lt;00:00, 41.30it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 28-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.779
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5648979422231769
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.96, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.972, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.45], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.482], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.32]]]
+Rp:46.970 | Rwp:53.188 | Rsquare:309.638
+
+
+WPEM 29-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.778
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5660076798457581
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.963, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.972, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.449], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.481], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.318]]]
+Rp:46.980 | Rwp:53.196 | Rsquare:309.749
+
+
+WPEM 30-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.778
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5671005785860104
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.965, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.973, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.449], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.48], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.316]]]
+Rp:46.991 | Rwp:53.205 | Rsquare:309.867
+
+
+WPEM 31-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.778
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5681762572904128
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.966, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.975, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.448], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.479], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.315]]]
+Rp:47.001 | Rwp:53.213 | Rsquare:309.979
+
+
+WPEM 32-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.778
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5692340206264659
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.968, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.976, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.448], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.478], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.313]]]
+Rp:47.010 | Rwp:53.221 | Rsquare:310.086
+
+
+WPEM 33-th iteration
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 68%|█████████████████████████████▏             | 34/50 [00:00&lt;00:00, 41.69it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Under the central field approximation, the effective charge of CuII is: 25.777
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5702732984093672
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.971, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.976, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.447], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.478], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.312]]]
+Rp:47.018 | Rwp:53.227 | Rsquare:310.171
+
+
+WPEM 34-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.777
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5712933580372739
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.972, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.977, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.447], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.477], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.31]]]
+Rp:47.026 | Rwp:53.234 | Rsquare:310.266
+
+
+WPEM 35-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.777
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.572294379994188
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.973, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.978, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.447], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.476], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.309]]]
+Rp:47.035 | Rwp:53.240 | Rsquare:310.356
+
+
+WPEM 36-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.777
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5732761313904181
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.974, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.98, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.446], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.475], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.307]]]
+Rp:47.042 | Rwp:53.247 | Rsquare:310.442
+
+
+WPEM 37-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.776
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5742384328292118
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.977, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.979, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.446], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.474], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.306]]]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:47.048 | Rwp:53.251 | Rsquare:310.507
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 78%|█████████████████████████████████▌         | 39/50 [00:00&lt;00:00, 42.00it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 38-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.776
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5751808651457964
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.978, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.98, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.446], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.473], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.305]]]
+Rp:47.055 | Rwp:53.256 | Rsquare:310.584
+
+
+WPEM 39-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.776
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5761039142795297
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.979, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.981, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.446], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.472], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.304]]]
+Rp:47.063 | Rwp:53.262 | Rsquare:310.657
+
+
+WPEM 40-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.776
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.577007586734658
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.98, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.982, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.446], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.472], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.303]]]
+Rp:47.070 | Rwp:53.266 | Rsquare:310.726
+
+
+WPEM 41-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.775
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5778919101049942
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.983, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.982, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.471], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.302]]]
+Rp:47.075 | Rwp:53.269 | Rsquare:310.775
+
+
+WPEM 42-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.775
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5787566161284525
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.984, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.983, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.47], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.301]]]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|█████████████████████████████████████▊     | 44/50 [00:01&lt;00:00, 41.98it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:47.082 | Rwp:53.274 | Rsquare:310.838
+
+
+WPEM 43-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.775
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5796023832221879
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.985, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.984, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.469], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.3]]]
+Rp:47.088 | Rwp:53.278 | Rsquare:310.897
+
+
+WPEM 44-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.775
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.580429346649011
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.986, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.985, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.468], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.299]]]
+Rp:47.094 | Rwp:53.282 | Rsquare:310.953
+
+
+WPEM 45-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.775
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5812376463631543
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.986, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.986, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.468], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.298]]]
+Rp:47.100 | Rwp:53.286 | Rsquare:311.006
+
+
+WPEM 46-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.774
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5820274758618512
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.989, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.985, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.467], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.298]]]
+Rp:47.104 | Rwp:53.287 | Rsquare:311.041
+
+
+WPEM 47-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.774
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5827986841757195
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.99, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.986, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.466], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.297]]]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|██████████████████████████████████████████▏| 49/50 [00:01&lt;00:00, 41.72it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████| 50/50 [00:01&lt;00:00, 41.36it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:47.110 | Rwp:53.291 | Rsquare:311.089
+
+
+WPEM 48-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.774
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5835520752315267
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.99, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.987, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.445], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.465], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.296]]]
+Rp:47.115 | Rwp:53.294 | Rsquare:311.135
+
+
+WPEM 49-th iteration
+Under the central field approximation, the effective charge of CuII is: 25.774
+The Integrated Energy ratio for satellite peak of [(&#39;CuII&#39;, &#39;2p3/2&#39;), (&#39;CuII&#39;, &#39;2p1/2&#39;)] is 0.5842878717303636
+The energies of electrons are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 933.991, [2, 1, 1.5]], [&#39;CuII&#39;, &#39;2p1/2&#39;, 953.987, [2, 1, 0.5]]]]
+The energies of satellite peak are:
+[[[&#39;CuII&#39;, &#39;2p3/2&#39;, 941.444], [&#39;CuII&#39;, &#39;2p3/2&#39;, 943.465], [&#39;CuII&#39;, &#39;2p1/2&#39;, 962.296]]]
+Rp:47.120 | Rwp:53.297 | Rsquare:311.179
+
+
+After update the background :   Rp = 47.075 | Rwp = 53.216 | Rsquare = 310.640
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<img alt="../../_images/e771332a0c9b055fc96971b62ad709146904438581e58c52ce40bb694f5637b4.png" src="../../_images/e771332a0c9b055fc96971b62ad709146904438581e58c52ce40bb694f5637b4.png" />
+<img alt="../../_images/1790b28cbec61f61dc4307fca2564753bcf459a701a8345baefcbb07126d19b1.png" src="../../_images/1790b28cbec61f61dc4307fca2564753bcf459a701a8345baefcbb07126d19b1.png" />
+<img alt="../../_images/2af622ccdec2bd40c06a663dbcef632af0718e6e48228cffd81521607078c23a.png" src="../../_images/2af622ccdec2bd40c06a663dbcef632af0718e6e48228cffd81521607078c23a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50-th iterations, reach the maximum number of iteration steps.
+ Rp: 47.075
+Rwp: 53.216 
+
+
+WPEM-XPS program running time :  0 hours 0 minute  6 second  
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;0 hours 0 minute  6 second  &#39;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>The results are saved in the <code class="docutils literal notranslate"><span class="pre">XPSFittingProfile</span></code> folder.</strong></p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/XPS"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../EXAFS/7th.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The tutorial 7th</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">coding</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bin CAO
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Author: <a href="https://bin-cao.github.io/">Bin CAO</a><br>
+Advanced Materials Thrust, HKUST(GZ) | Department of Physics, CityU HK
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1437 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The tutorial 5th &#8212; PyXplore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/atomic_dis/5th';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The tutorial 6th" href="../solid_solution/6th.html" />
+    <link rel="prev" title="The tutorial 4th" href="../simulation/4th.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PyXplore - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PyXplore - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../parameter.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resultsFiles.html">Output Files</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorial Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_opt/1st.html">The tutorial 1st</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_phases/2nd.html">The tutorial 2nd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../amorphous/3rd.html">The tutorial 3rd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/4th.html">The tutorial 4th</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">The tutorial 5th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solid_solution/6th.html">The tutorial 6th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EXAFS/7th.html">The tutorial 7th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../XPS/8th.html">The tutorial 8th</a></li>
+</ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/PyWPEM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/PyWPEM/issues/new?title=Issue%20on%20page%20%2Ftutorials/atomic_dis/5th.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/atomic_dis/5th.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The tutorial 5th</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">coding</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-tutorial-5th">
+<h1>The tutorial 5th<a class="headerlink" href="#the-tutorial-5th" title="Link to this heading">#</a></h1>
+<p>Shows how to calculate atomic distances based on the radial distribution function derived from diffraction patterns.</p>
+<section id="coding">
+<h2>coding<a class="headerlink" href="#coding" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>1. Save your diffraction data to the root directory and rename the file to <code class="docutils literal notranslate"><span class="pre">intensity.csv</span></code>.</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import PyXplore package</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyXplore</span><span class="w"> </span><span class="kn">import</span> <span class="n">WPEM</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>██╗    ██╗██████╗ ███████╗███╗   ███╗
+██║    ██║██╔══██╗██╔════╝████╗ ████║
+██║ █╗ ██║██████╔╝█████╗  ██╔████╔██║
+██║███╗██║██╔═══╝ ██╔══╝  ██║╚██╔╝██║
+╚███╔███╔╝██║     ███████╗██║ ╚═╝ ██║
+ ╚══╝╚══╝ ╚═╝     ╚══════╝╚═╝     ╚═╝                                                  
+
+A Diffraction Refinement Software : WPEM
+Bin Cao, Advanced Materials Thrust, Hong Kong University of Science and Technology (Guangzhou)
+URL : https://github.com/Bin-Cao/WPEM
+Executed on : 2026-01-30 19:56:30  | Have a great day.
+====================================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>2. Parse your diffraction data (<code class="docutils literal notranslate"><span class="pre">2θ</span></code>, intensity) and perform background processing.</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intensity_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;intensity.csv&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span> <span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">WPEM</span><span class="o">.</span><span class="n">BackgroundFit</span><span class="p">(</span><span class="n">intensity_csv</span><span class="p">,</span><span class="n">lowAngleRange</span><span class="o">=</span><span class="mf">3.8</span><span class="p">,</span><span class="n">poly_n</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">bac_split</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">bac_num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/198d89c1fe0df80d28e64e7923407a7eb6146420ede030df63e4b1aedb412ff3.png" src="../../_images/198d89c1fe0df80d28e64e7923407a7eb6146420ede030df63e4b1aedb412ff3.png" />
+<img alt="../../_images/dbd9c98931627aa94f2069845881a0af95176ac30003dd4c430e879b7ca9568b.png" src="../../_images/dbd9c98931627aa94f2069845881a0af95176ac30003dd4c430e879b7ca9568b.png" />
+<img alt="../../_images/a6584bddb6d21fbca1a7ebf77fa2722fae6ff7f8bb01397a52a7cb0d23d80ce6.png" src="../../_images/a6584bddb6d21fbca1a7ebf77fa2722fae6ff7f8bb01397a52a7cb0d23d80ce6.png" />
+<img alt="../../_images/0b58998ae7da7745fd267485168fd0ece51a94fae597333c80783818f2e0a50c.png" src="../../_images/0b58998ae7da7745fd267485168fd0ece51a94fae597333c80783818f2e0a50c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>3. After running the code, a new folder named <code class="docutils literal notranslate"><span class="pre">ConvertedDocuments</span></code> will be created in the root directory. This folder contains the background information.</strong></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Copy the two important files — <code class="docutils literal notranslate"><span class="pre">bac.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">no_bac_intensity.csv</span></code> — from <code class="docutils literal notranslate"><span class="pre">ConvertedDocuments</span></code> into the root directory, as they are required for the next steps.</strong></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Parse the <code class="docutils literal notranslate"><span class="pre">.cif</span></code> file as demonstrated in the crystal fitting section, and generate the <code class="docutils literal notranslate"><span class="pre">peak0.csv</span></code> file.</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The wavelength is set according to the actual light source</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.03</span><span class="p">]</span>
+<span class="c1"># The file name of non-background data (2theta-intensity data)</span>
+<span class="n">no_bac_intensity_file</span> <span class="o">=</span> <span class="s2">&quot;no_bac_intensity.csv&quot;</span> 
+<span class="c1"># The file name of raw/original data (2theta-intensity data)</span>
+<span class="n">original_file</span> <span class="o">=</span> <span class="s2">&quot;intensity.csv&quot;</span>  
+<span class="c1"># The file name of background data (2theta-intensity data)</span>
+<span class="n">bacground_file</span> <span class="o">=</span> <span class="s2">&quot;bac.csv&quot;</span>  
+
+
+<span class="c1"># Input the initial lattice constants {a, b, c, α, β, γ}, whose values need to be assumed at initialization.</span>
+<span class="n">Lattice_constants</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">17.53</span><span class="p">,</span><span class="mf">17.53</span><span class="p">,</span><span class="mf">6.47</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">120</span><span class="p">],]</span>
+
+<span class="c1"># Execute the model</span>
+
+<span class="n">WPEM</span><span class="o">.</span><span class="n">XRDfit</span><span class="p">(</span>
+    <span class="n">wavelength</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">Lattice_constants</span><span class="p">,</span><span class="n">no_bac_intensity_file</span><span class="p">,</span> <span class="n">original_file</span><span class="p">,</span> <span class="n">bacground_file</span><span class="p">,</span> 
+    <span class="n">subset_number</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">low_bound</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">up_bound</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">bta</span> <span class="o">=</span> <span class="mf">0.78</span><span class="p">,</span><span class="n">iter_max</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">asy_C</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">InitializationEpoch</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Started at Fri Jan 30 19:56:35 2026 
+
+Initialization
+--------------------------------------------------------------------------------
+Diffraction indexs have been obtained by WPEM
+
+
+The input crystal system is: Hexagonal  |  The initial lattice constants : 17.53 17.53 6.47 90 90 120
+—————————— Initilize the parameters by WPEM ——————————
+Parameter initialization has been completed 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                    | 0/50 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2%|▉                                           | 1/50 [00:05&lt;04:42,  5.76s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 1-th iteration
+[array([ 17.5303 ,  17.5303 ,   6.46268,  90.     ,  90.     , 120.     ])]
+Rp:6.705 | Rwp:8.563 | Rsquare:2.703
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|█▊                                          | 2/50 [00:11&lt;04:25,  5.54s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 2-th iteration
+[array([ 17.52878,  17.52878,   6.45665,  90.     ,  90.     , 120.     ])]
+Rp:5.644 | Rwp:7.336 | Rsquare:1.867
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6%|██▋                                         | 3/50 [00:16&lt;04:11,  5.35s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 3-th iteration
+[array([ 17.52798,  17.52798,   6.45154,  90.     ,  90.     , 120.     ])]
+Rp:5.279 | Rwp:6.809 | Rsquare:1.619
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8%|███▌                                        | 4/50 [00:21&lt;04:00,  5.23s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 4-th iteration
+[array([ 17.52969,  17.52969,   6.44637,  90.     ,  90.     , 120.     ])]
+Rp:5.010 | Rwp:6.429 | Rsquare:1.455
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|████▍                                       | 5/50 [00:26&lt;03:54,  5.22s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 5-th iteration
+[array([ 17.53209,  17.53209,   6.44193,  90.     ,  90.     , 120.     ])]
+Rp:4.769 | Rwp:6.121 | Rsquare:1.324
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 12%|█████▎                                      | 6/50 [00:31&lt;03:48,  5.19s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 6-th iteration
+[array([ 17.53448,  17.53448,   6.43842,  90.     ,  90.     , 120.     ])]
+Rp:4.553 | Rwp:5.868 | Rsquare:1.221
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|██████▏                                     | 7/50 [00:36&lt;03:41,  5.14s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 7-th iteration
+[array([ 17.53661,  17.53661,   6.43579,  90.     ,  90.     , 120.     ])]
+Rp:4.375 | Rwp:5.656 | Rsquare:1.138
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|███████                                     | 8/50 [00:41&lt;03:35,  5.14s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 8-th iteration
+[array([ 17.53843,  17.53843,   6.43389,  90.     ,  90.     , 120.     ])]
+Rp:4.227 | Rwp:5.475 | Rsquare:1.067
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|███████▉                                    | 9/50 [00:46&lt;03:28,  5.09s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 9-th iteration
+[array([ 17.53994,  17.53994,   6.43257,  90.     ,  90.     , 120.     ])]
+Rp:4.103 | Rwp:5.316 | Rsquare:1.007
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|████████▌                                  | 10/50 [00:51&lt;03:23,  5.08s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 10-th iteration
+[array([ 17.54114,  17.54114,   6.43171,  90.     ,  90.     , 120.     ])]
+Rp:3.993 | Rwp:5.173 | Rsquare:0.953
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 22%|█████████▍                                 | 11/50 [00:57&lt;03:26,  5.30s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 11-th iteration
+[array([ 17.54207,  17.54207,   6.43121,  90.     ,  90.     , 120.     ])]
+Rp:3.893 | Rwp:5.044 | Rsquare:0.905
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24%|██████████▎                                | 12/50 [01:03&lt;03:24,  5.39s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 12-th iteration
+[array([ 17.54274,  17.54274,   6.431  ,  90.     ,  90.     , 120.     ])]
+Rp:3.800 | Rwp:4.926 | Rsquare:0.862
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 26%|███████████▏                               | 13/50 [01:08&lt;03:19,  5.39s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 13-th iteration
+[array([ 17.54317,  17.54317,   6.43102,  90.     ,  90.     , 120.     ])]
+Rp:3.715 | Rwp:4.817 | Rsquare:0.823
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|████████████                               | 14/50 [01:14&lt;03:14,  5.41s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 14-th iteration
+[array([ 17.54341,  17.54341,   6.43122,  90.     ,  90.     , 120.     ])]
+Rp:3.638 | Rwp:4.716 | Rsquare:0.786
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 30%|████████████▉                              | 15/50 [01:19&lt;03:08,  5.40s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 15-th iteration
+[array([ 17.54347,  17.54347,   6.43157,  90.     ,  90.     , 120.     ])]
+Rp:3.567 | Rwp:4.621 | Rsquare:0.752
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 32%|█████████████▊                             | 16/50 [01:24&lt;02:59,  5.29s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 16-th iteration
+[array([ 17.5434 ,  17.5434 ,   6.43203,  90.     ,  90.     , 120.     ])]
+Rp:3.499 | Rwp:4.533 | Rsquare:0.721
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 34%|██████████████▌                            | 17/50 [01:29&lt;02:52,  5.22s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 17-th iteration
+[array([ 17.54321,  17.54321,   6.43256,  90.     ,  90.     , 120.     ])]
+Rp:3.434 | Rwp:4.451 | Rsquare:0.691
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 36%|███████████████▍                           | 18/50 [01:34&lt;02:44,  5.14s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 18-th iteration
+[array([ 17.54295,  17.54295,   6.43315,  90.     ,  90.     , 120.     ])]
+Rp:3.374 | Rwp:4.374 | Rsquare:0.663
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|████████████████▎                          | 19/50 [01:39&lt;02:41,  5.20s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 19-th iteration
+[array([ 17.54264,  17.54264,   6.43376,  90.     ,  90.     , 120.     ])]
+Rp:3.318 | Rwp:4.302 | Rsquare:0.637
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|█████████████████▏                         | 20/50 [01:45&lt;02:41,  5.39s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 20-th iteration
+[array([ 17.5423 ,  17.5423 ,   6.43439,  90.     ,  90.     , 120.     ])]
+Rp:3.265 | Rwp:4.235 | Rsquare:0.612
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 42%|██████████████████                         | 21/50 [01:51&lt;02:37,  5.43s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 21-th iteration
+[array([ 17.54195,  17.54195,   6.435  ,  90.     ,  90.     , 120.     ])]
+Rp:3.215 | Rwp:4.173 | Rsquare:0.589
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 44%|██████████████████▉                        | 22/50 [01:56&lt;02:34,  5.51s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 22-th iteration
+[array([ 17.54161,  17.54161,   6.4356 ,  90.     ,  90.     , 120.     ])]
+Rp:3.168 | Rwp:4.114 | Rsquare:0.568
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 46%|███████████████████▊                       | 23/50 [02:02&lt;02:29,  5.53s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 23-th iteration
+[array([ 17.54128,  17.54128,   6.43617,  90.     ,  90.     , 120.     ])]
+Rp:3.124 | Rwp:4.060 | Rsquare:0.548
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████████████████████▋                      | 24/50 [02:07&lt;02:22,  5.50s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 24-th iteration
+[array([ 17.54098,  17.54098,   6.43672,  90.     ,  90.     , 120.     ])]
+Rp:3.083 | Rwp:4.010 | Rsquare:0.529
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████████████████████▌                     | 25/50 [02:13&lt;02:15,  5.42s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 25-th iteration
+[array([ 17.5407 ,  17.5407 ,   6.43722,  90.     ,  90.     , 120.     ])]
+Rp:3.044 | Rwp:3.963 | Rsquare:0.511
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 52%|██████████████████████▎                    | 26/50 [02:18&lt;02:12,  5.53s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 26-th iteration
+[array([ 17.54045,  17.54045,   6.43769,  90.     ,  90.     , 120.     ])]
+Rp:3.008 | Rwp:3.920 | Rsquare:0.495
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 54%|███████████████████████▏                   | 27/50 [02:24&lt;02:09,  5.61s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 27-th iteration
+[array([ 17.54023,  17.54023,   6.43812,  90.     ,  90.     , 120.     ])]
+Rp:2.974 | Rwp:3.880 | Rsquare:0.480
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 56%|████████████████████████                   | 28/50 [02:30&lt;02:05,  5.69s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 28-th iteration
+[array([ 17.54003,  17.54003,   6.43852,  90.     ,  90.     , 120.     ])]
+Rp:2.942 | Rwp:3.842 | Rsquare:0.466
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|████████████████████████▉                  | 29/50 [02:36&lt;01:59,  5.68s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 29-th iteration
+[array([ 17.53987,  17.53987,   6.43888,  90.     ,  90.     , 120.     ])]
+Rp:2.912 | Rwp:3.808 | Rsquare:0.453
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|█████████████████████████▊                 | 30/50 [02:41&lt;01:51,  5.60s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 30-th iteration
+[array([ 17.53973,  17.53973,   6.43921,  90.     ,  90.     , 120.     ])]
+Rp:2.885 | Rwp:3.775 | Rsquare:0.440
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 62%|██████████████████████████▋                | 31/50 [02:46&lt;01:43,  5.43s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 31-th iteration
+[array([ 17.53961,  17.53961,   6.43951,  90.     ,  90.     , 120.     ])]
+Rp:2.858 | Rwp:3.745 | Rsquare:0.429
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 64%|███████████████████████████▌               | 32/50 [02:51&lt;01:34,  5.28s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 32-th iteration
+[array([ 17.53951,  17.53951,   6.43978,  90.     ,  90.     , 120.     ])]
+Rp:2.834 | Rwp:3.717 | Rsquare:0.418
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 66%|████████████████████████████▍              | 33/50 [02:56&lt;01:27,  5.17s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 33-th iteration
+[array([ 17.53942,  17.53942,   6.44003,  90.     ,  90.     , 120.     ])]
+Rp:2.811 | Rwp:3.692 | Rsquare:0.408
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 68%|█████████████████████████████▏             | 34/50 [03:01&lt;01:21,  5.08s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 34-th iteration
+[array([ 17.53936,  17.53936,   6.44025,  90.     ,  90.     , 120.     ])]
+Rp:2.789 | Rwp:3.668 | Rsquare:0.399
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|██████████████████████████████             | 35/50 [03:06&lt;01:15,  5.03s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 35-th iteration
+[array([ 17.5393 ,  17.5393 ,   6.44045,  90.     ,  90.     , 120.     ])]
+Rp:2.768 | Rwp:3.645 | Rsquare:0.390
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 72%|██████████████████████████████▉            | 36/50 [03:11&lt;01:09,  4.96s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 36-th iteration
+[array([ 17.53926,  17.53926,   6.44064,  90.     ,  90.     , 120.     ])]
+Rp:2.749 | Rwp:3.624 | Rsquare:0.382
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 74%|███████████████████████████████▊           | 37/50 [03:16&lt;01:04,  4.94s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 37-th iteration
+[array([ 17.53922,  17.53922,   6.4408 ,  90.     ,  90.     , 120.     ])]
+Rp:2.730 | Rwp:3.605 | Rsquare:0.375
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 76%|████████████████████████████████▋          | 38/50 [03:20&lt;00:58,  4.91s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 38-th iteration
+[array([ 17.5392 ,  17.5392 ,   6.44095,  90.     ,  90.     , 120.     ])]
+Rp:2.713 | Rwp:3.586 | Rsquare:0.368
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 78%|█████████████████████████████████▌         | 39/50 [03:26&lt;00:54,  4.98s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 39-th iteration
+[array([ 17.53918,  17.53918,   6.44109,  90.     ,  90.     , 120.     ])]
+Rp:2.696 | Rwp:3.569 | Rsquare:0.361
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|██████████████████████████████████▍        | 40/50 [03:31&lt;00:51,  5.13s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 40-th iteration
+[array([ 17.53917,  17.53917,   6.44122,  90.     ,  90.     , 120.     ])]
+Rp:2.681 | Rwp:3.553 | Rsquare:0.355
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 82%|███████████████████████████████████▎       | 41/50 [03:36&lt;00:45,  5.08s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 41-th iteration
+[array([ 17.53916,  17.53916,   6.44133,  90.     ,  90.     , 120.     ])]
+Rp:2.666 | Rwp:3.538 | Rsquare:0.349
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 84%|████████████████████████████████████       | 42/50 [03:41&lt;00:40,  5.07s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 42-th iteration
+[array([ 17.53915,  17.53915,   6.44143,  90.     ,  90.     , 120.     ])]
+Rp:2.652 | Rwp:3.524 | Rsquare:0.344
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 86%|████████████████████████████████████▉      | 43/50 [03:46&lt;00:35,  5.02s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 43-th iteration
+[array([ 17.53915,  17.53915,   6.44152,  90.     ,  90.     , 120.     ])]
+Rp:2.638 | Rwp:3.511 | Rsquare:0.338
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|█████████████████████████████████████▊     | 44/50 [03:51&lt;00:30,  5.05s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 44-th iteration
+[array([ 17.53915,  17.53915,   6.44161,  90.     ,  90.     , 120.     ])]
+Rp:2.626 | Rwp:3.499 | Rsquare:0.334
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 90%|██████████████████████████████████████▋    | 45/50 [03:56&lt;00:25,  5.01s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 45-th iteration
+[array([ 17.53916,  17.53916,   6.44169,  90.     ,  90.     , 120.     ])]
+Rp:2.613 | Rwp:3.487 | Rsquare:0.329
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|███████████████████████████████████████▌   | 46/50 [04:01&lt;00:19,  4.98s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 46-th iteration
+[array([ 17.53916,  17.53916,   6.44176,  90.     ,  90.     , 120.     ])]
+Rp:2.602 | Rwp:3.476 | Rsquare:0.325
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 94%|████████████████████████████████████████▍  | 47/50 [04:06&lt;00:14,  4.93s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 47-th iteration
+[array([ 17.53916,  17.53916,   6.44182,  90.     ,  90.     , 120.     ])]
+Rp:2.590 | Rwp:3.466 | Rsquare:0.321
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|█████████████████████████████████████████▎ | 48/50 [04:11&lt;00:09,  4.93s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 48-th iteration
+[array([ 17.53917,  17.53917,   6.44188,  90.     ,  90.     , 120.     ])]
+Rp:2.580 | Rwp:3.456 | Rsquare:0.317
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|██████████████████████████████████████████▏| 49/50 [04:15&lt;00:04,  4.90s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 49-th iteration
+[array([ 17.53918,  17.53918,   6.44194,  90.     ,  90.     , 120.     ])]
+Rp:2.570 | Rwp:3.447 | Rsquare:0.313
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████| 50/50 [04:20&lt;00:00,  4.91s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████| 50/50 [04:20&lt;00:00,  5.22s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 50-th iteration
+[array([ 17.53918,  17.53918,   6.44198,  90.     ,  90.     , 120.     ])]
+Rp:2.561 | Rwp:3.439 | Rsquare:0.310
+After update the background :   Rp = 2.375 | Rwp = 3.429 | Rsquare = 0.296
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<img alt="../../_images/d0140e8788bf50ee84a5949d208a9c8f5738506a8d1fac12dc089967d739a6b6.png" src="../../_images/d0140e8788bf50ee84a5949d208a9c8f5738506a8d1fac12dc089967d739a6b6.png" />
+<img alt="../../_images/e9cf87a46b39dd7eacdbf48da1e434b299dd03916c167b0b3befb74334a06440.png" src="../../_images/e9cf87a46b39dd7eacdbf48da1e434b299dd03916c167b0b3befb74334a06440.png" />
+<img alt="../../_images/07a15745c6aff3461fc516acad9ce399c4a64731d4a272a67ccafa84695c1b77.png" src="../../_images/07a15745c6aff3461fc516acad9ce399c4a64731d4a272a67ccafa84695c1b77.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mass fraction without structure factor estimate in % : [100.0] 
+ Saved at the result documents
+50-th iterations, reach the maximum number of iteration steps.
+ Rp: 2.375
+Rwp: 3.429 
+
+
+WPEM program running time :  0 hours 4 minute  25 second  
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;0 hours 4 minute  25 second  &#39;,
+ [array([ 17.53918,  17.53918,   6.44198,  90.     ,  90.     , 120.     ])])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>After processing the crystalline signals, the remaining signals corresponding to the amorphous phase are saved.</p>
+</div></blockquote>
+<blockquote>
+<div><p>Fit the amorphous signal using the following code:</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">WPEM</span><span class="o">.</span><span class="n">Amorphous_fit</span><span class="p">(</span><span class="n">mix_component</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sigma2_coef</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span><span class="n">peak_location</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">Wavelength</span><span class="o">=</span><span class="mf">1.03</span>
+                <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations: 200
+W_list: [1185.12819262 1119.26679446 1052.49632478]
+mu_list: [ 7.76302399 12.68996442 13.71204058]
+sigma2_list: [3.37732832 1.65921789 2.41546213]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations: 400
+W_list: [1185.49473992 1152.83843531 1018.55813663]
+mu_list: [ 7.76376354 12.69123709 13.74556784]
+sigma2_list: [3.37853699 1.66719305 2.39450036]
+Number of Iterations: 600
+W_list: [1186.10248817 1191.37946561  979.40935807]
+mu_list: [ 7.76504724 12.69074866 13.78980852]
+sigma2_list: [3.38078704 1.67263895 2.36260016]
+Number of Iterations: 800
+W_list: [1186.78376803 1236.56598451  933.54155932]
+mu_list: [ 7.76652543 12.69221187 13.84358608]
+sigma2_list: [3.38347896 1.67746109 2.32449253]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations: 1000
+W_list: [1187.55939546 1289.0345183   880.2973981 ]
+mu_list: [ 7.76825618 12.69656684 13.90885422]
+sigma2_list: [3.38675259 1.68141332 2.27913892]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations: 1200
+W_list: [1188.47713266 1349.4010493   819.0131299 ]
+mu_list: [ 7.77035791 12.70486694 13.98836335]
+sigma2_list: [3.39086413 1.68427079 2.22487638]
+Number of Iterations: 1400
+W_list: [1189.61861585 1418.36859023  748.90410577]
+mu_list: [ 7.77302613 12.71841302 14.08614601]
+sigma2_list: [3.39622158 1.6859776  2.15914804]
+Number of Iterations: 1600
+W_list: [1191.11997088 1496.99409984  668.77724114]
+mu_list: [ 7.77658348 12.73894492 14.20882298]
+sigma2_list: [3.40349126 1.68678878 2.07753377]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations: 1800
+W_list: [1193.22686579 1587.57903486  576.08541121]
+mu_list: [ 7.78161574 12.76926333 14.36949945]
+sigma2_list: [3.41389168 1.68754091 1.97077624]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations: 2000
+W_list: [1196.53053388 1697.23401637  463.1267616 ]
+mu_list: [ 7.78955272 12.81588326 14.60402761]
+sigma2_list: [3.43044595 1.69048491 1.81193177]
+Number of Iterations: 2200
+W_list: [1204.30264349 1864.39879715  288.18987122]
+mu_list: [ 7.80841706 12.91177567 15.12582788]
+sigma2_list: [3.4703969  1.70617182 1.42301273]
+Convergence get at 2380 iterations!
+W_list: [1197.27309131 2087.94594198   71.67227856]
+mu_list: [ 7.79464934 13.08232997 16.57523755]
+sigma2_list: [3.45031766 1.93333885 0.10433542]
+estimated interatomic distances : 9.319730
+Rp =  7.588248351119438
+</pre></div>
+</div>
+<img alt="../../_images/184c812586bfa204ac97b12bb043e22e7d0d447cb007c93138aadd2df9d196ac.png" src="../../_images/184c812586bfa204ac97b12bb043e22e7d0d447cb007c93138aadd2df9d196ac.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>After coverage, the amorphous components (referred to as “holes”) are derived. You can visualize each amorphous hole using the provided plotting functions. The results are saved in the <code class="docutils literal notranslate"><span class="pre">DecomposedComponents</span></code> folder.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">WPEM</span><span class="o">.</span><span class="n">Plot_Components</span><span class="p">(</span><span class="n">lowboundary</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">upboundary</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span> <span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">Macromolecule</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">phase</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2cb49ef4b8b9a858a1a81b076fe09541932a4afc096dbc111d46a8d2a674837c.png" src="../../_images/2cb49ef4b8b9a858a1a81b076fe09541932a4afc096dbc111d46a8d2a674837c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative bulk crystallinity % (calculated by integral area): 39.83147026233812 
+ Saved at the WPEMFittingResults
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>The relative bulk crystallinity can be estimated from the diffraction intensity ratio</p>
+<p>after subtracting the amorphous signal, which is saved in the ‘DecomposedComponents’ folder as ‘Amorphous.csv’.</p>
+<p>Additionally, the radial distribution function (RDF) can be applied to the remaining signal to calculate the nearest-neighbor atomic distance based on features within the diffraction pattern.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">WPEM</span><span class="o">.</span><span class="n">AmorphousRDFun</span><span class="p">(</span> <span class="n">r_max</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span><span class="n">density_zero</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Nf2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">highlight</span><span class="o">=</span> <span class="mi">6</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6fe8b2536c2676bf80ea13168e69ad6459ebba1839a932afca28015fb415b034.png" src="../../_images/6fe8b2536c2676bf80ea13168e69ad6459ebba1839a932afca28015fb415b034.png" />
+<img alt="../../_images/3eaa898aef9ba24a0e01139d007f9079ba2a5c6bf7e8f9e58cb2cddaa8371af7.png" src="../../_images/3eaa898aef9ba24a0e01139d007f9079ba2a5c6bf7e8f9e58cb2cddaa8371af7.png" />
+<img alt="../../_images/c7e44c3fc7740e5a79ce2cc3e1ebc2e12bd13be156fb85f6656a54c8aa94bb1e.png" src="../../_images/c7e44c3fc7740e5a79ce2cc3e1ebc2e12bd13be156fb85f6656a54c8aa94bb1e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>interatomic distances is 0.940000 A°
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.42, 0.93, 1.36, 1.8, 2.23, 2.68]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The peak positions at 0.42, 0.93, 1.36, 1.80, 2.23, and 2.68 correspond to a series of atomic clusters.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/atomic_dis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../simulation/4th.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The tutorial 4th</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../solid_solution/6th.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The tutorial 6th</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">coding</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bin CAO
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Author: <a href="https://bin-cao.github.io/">Bin CAO</a><br>
+Advanced Materials Thrust, HKUST(GZ) | Department of Physics, CityU HK
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

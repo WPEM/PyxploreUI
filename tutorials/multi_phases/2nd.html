@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The tutorial 2nd &#8212; PyXplore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/multi_phases/2nd';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The tutorial 3rd" href="../amorphous/3rd.html" />
+    <link rel="prev" title="The tutorial 1st" href="../basic_opt/1st.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PyXplore - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PyXplore - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../parameter.html">Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resultsFiles.html">Output Files</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorial Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_opt/1st.html">The tutorial 1st</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">The tutorial 2nd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../amorphous/3rd.html">The tutorial 3rd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/4th.html">The tutorial 4th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../atomic_dis/5th.html">The tutorial 5th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solid_solution/6th.html">The tutorial 6th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EXAFS/7th.html">The tutorial 7th</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../XPS/8th.html">The tutorial 8th</a></li>
+</ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/PyWPEM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/PyWPEM/issues/new?title=Issue%20on%20page%20%2Ftutorials/multi_phases/2nd.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/multi_phases/2nd.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The tutorial 2nd</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">coding</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-tutorial-2nd">
+<h1>The tutorial 2nd<a class="headerlink" href="#the-tutorial-2nd" title="Link to this heading">#</a></h1>
+<p>Introduces the process for refining multi-phase systems.</p>
+<section id="coding">
+<h2>coding<a class="headerlink" href="#coding" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>1. Save your diffraction data to the root directory and rename the file to <code class="docutils literal notranslate"><span class="pre">intensity.csv</span></code>.</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import PyXplore package</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyXplore</span><span class="w"> </span><span class="kn">import</span> <span class="n">WPEM</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>██╗    ██╗██████╗ ███████╗███╗   ███╗
+██║    ██║██╔══██╗██╔════╝████╗ ████║
+██║ █╗ ██║██████╔╝█████╗  ██╔████╔██║
+██║███╗██║██╔═══╝ ██╔══╝  ██║╚██╔╝██║
+╚███╔███╔╝██║     ███████╗██║ ╚═╝ ██║
+ ╚══╝╚══╝ ╚═╝     ╚══════╝╚═╝     ╚═╝                                                  
+
+A Diffraction Refinement Software : WPEM
+Bin Cao, Advanced Materials Thrust, Hong Kong University of Science and Technology (Guangzhou)
+URL : https://github.com/Bin-Cao/WPEM
+Executed on : 2026-01-30 20:02:32  | Have a great day.
+====================================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>2. Parse your diffraction data (<code class="docutils literal notranslate"><span class="pre">2θ</span></code>, intensity) and perform background processing.</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intensity_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;intensity.csv&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span> <span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">WPEM</span><span class="o">.</span><span class="n">BackgroundFit</span><span class="p">(</span><span class="n">intensity_csv</span><span class="p">,</span><span class="n">lowAngleRange</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span><span class="n">poly_n</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">bac_split</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">bac_num</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7680f47f49a9945e5fbc83739b94877a360767ec80cfeb6f5d5dadaec0c20a62.png" src="../../_images/7680f47f49a9945e5fbc83739b94877a360767ec80cfeb6f5d5dadaec0c20a62.png" />
+<img alt="../../_images/350eacfe86d4933fdfbbf4cdaede6f5202c37847400afaa29fc6b266efe8ff9e.png" src="../../_images/350eacfe86d4933fdfbbf4cdaede6f5202c37847400afaa29fc6b266efe8ff9e.png" />
+<img alt="../../_images/75f1d073f3053cc85f0d230d73b75af79ff881f31ea9fc9796d091f4dfb4ea7c.png" src="../../_images/75f1d073f3053cc85f0d230d73b75af79ff881f31ea9fc9796d091f4dfb4ea7c.png" />
+<img alt="../../_images/3f9788e3891be9e2c2a01f1802df05126c2975204c7b744dfcc710e71b151bb8.png" src="../../_images/3f9788e3891be9e2c2a01f1802df05126c2975204c7b744dfcc710e71b151bb8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>3. After running the code, a new folder named <code class="docutils literal notranslate"><span class="pre">ConvertedDocuments</span></code> will be created in the root directory. This folder contains the background information.</strong></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Copy the two important files — <code class="docutils literal notranslate"><span class="pre">bac.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">no_bac_intensity.csv</span></code> — from <code class="docutils literal notranslate"><span class="pre">ConvertedDocuments</span></code> into the root directory, as they are required for the next steps.</strong></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>4. After background subtraction, the next step is to parse the reference structure.</strong></p>
+<p>Save the reference <code class="docutils literal notranslate"><span class="pre">.cif</span></code> files in the root directory. For example, if your structures are Mn₂O₃ and RuO₂, place files named <code class="docutils literal notranslate"><span class="pre">Mn2O3.cif</span></code> and <code class="docutils literal notranslate"><span class="pre">RuO2.cif</span></code> in the root directory as the reference phases.</p>
+<p>If you are unsure of the reference phases, you must first perform phase identification. For assistance, please visit our website: <a class="reference external" href="https://xqueryer.caobin.asia/">https://xqueryer.caobin.asia/</a></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MnO_latt</span><span class="p">,</span> <span class="n">AtomCoordinates</span><span class="p">,</span><span class="n">des</span> <span class="o">=</span> <span class="n">WPEM</span><span class="o">.</span><span class="n">CIFpreprocess</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;Mn2O3.cif&#39;</span><span class="p">,</span><span class="n">two_theta_range</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">75</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the space group of input crystal is : I 21 3
+cif file parse completed
+atom locations claculated by parsed cif file
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>retrieval of all reciprocal vectors satisfying the diffraction geometry is done
+extinction peaks are distinguished
+There are 21 extinction peaks
+Diffraction condition judgment end !
+The input crystal system is: Cubic  |  The initial lattice constants : 9.41 9.41 9.41 90.0 90.0 90.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RuO_latt</span><span class="p">,</span> <span class="n">AtomCoordinates</span><span class="p">,</span><span class="n">des</span> <span class="o">=</span> <span class="n">WPEM</span><span class="o">.</span><span class="n">CIFpreprocess</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;RuO2.cif&#39;</span><span class="p">,</span><span class="n">two_theta_range</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">75</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the space group of input crystal is : P 42/m n m
+cif file parse completed
+atom locations claculated by wyckoff site
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>retrieval of all reciprocal vectors satisfying the diffraction geometry is done
+extinction peaks are distinguished
+There are 5 extinction peaks
+Diffraction condition judgment end !
+The input crystal system is: Tetragonal  |  The initial lattice constants : 4.4968 4.4968 3.1049 90.0 90.0 90.0
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>5. After running the code, a new folder named <code class="docutils literal notranslate"><span class="pre">output_xrd</span></code> will be generated.</strong></p>
+<p>Inside this folder, find the file named <code class="docutils literal notranslate"><span class="pre">xxxHKL.csv</span></code>. Copy it to the root directory and rename it sequentially as <code class="docutils literal notranslate"><span class="pre">peak0.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">peak1.csv</span></code>, and so on. These files will be used in the refinement step.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The wavelength is set according to the actual light source</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.540593</span><span class="p">,</span> <span class="mf">1.544414</span><span class="p">]</span>
+<span class="c1"># The file name of non-background data (2theta-intensity data)</span>
+<span class="n">no_bac_intensity_file</span> <span class="o">=</span> <span class="s2">&quot;no_bac_intensity.csv&quot;</span> 
+<span class="c1"># The file name of raw/original data (2theta-intensity data)</span>
+<span class="n">original_file</span> <span class="o">=</span> <span class="s2">&quot;intensity.csv&quot;</span>  
+<span class="c1"># The file name of background data (2theta-intensity data)</span>
+<span class="n">bacground_file</span> <span class="o">=</span> <span class="s2">&quot;bac.csv&quot;</span>  
+
+
+<span class="c1"># Input the initial lattice constants {a, b, c, α, β, γ}, whose values need to be assumed at initialization.</span>
+<span class="n">Lattice_constants</span> <span class="o">=</span> <span class="p">[</span><span class="n">MnO_latt</span><span class="p">,</span><span class="n">RuO_latt</span><span class="p">]</span>
+
+<span class="c1"># Execute the model</span>
+
+<span class="n">WPEM</span><span class="o">.</span><span class="n">XRDfit</span><span class="p">(</span>
+    <span class="n">wavelength</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">Lattice_constants</span><span class="p">,</span><span class="n">no_bac_intensity_file</span><span class="p">,</span> <span class="n">original_file</span><span class="p">,</span> <span class="n">bacground_file</span><span class="p">,</span> 
+    <span class="n">subset_number</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span><span class="n">low_bound</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">up_bound</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span><span class="n">bta</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span><span class="n">iter_max</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">asy_C</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">InitializationEpoch</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Started at Fri Jan 30 20:02:49 2026 
+
+Initialization
+--------------------------------------------------------------------------------
+Diffraction indexs have been obtained by WPEM
+Diffraction indexs have been obtained by WPEM
+
+
+The input crystal system is: Cubic  |  The initial lattice constants : 9.41 9.41 9.41 90.0 90.0 90.0
+The input crystal system is: Tetragonal  |  The initial lattice constants : 4.4968 4.4968 3.1049 90.0 90.0 90.0
+—————————— Initilize the parameters by WPEM ——————————
+Parameter initialization has been completed 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                     | 0/5 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 1-th iteration
+[array([ 9.41064,  9.41064,  9.41064, 90.     , 90.     , 90.     ]), array([ 4.49679,  4.49679,  3.10478, 90.     , 90.     , 90.     ])]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|█████████                                    | 1/5 [00:13&lt;00:53, 13.43s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:5.261 | Rwp:6.716 | Rsquare:5.517
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 2-th iteration
+[array([ 9.4107,  9.4107,  9.4107, 90.    , 90.    , 90.    ]), array([ 4.49678,  4.49678,  3.10454, 90.     , 90.     , 90.     ])]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|██████████████████                           | 2/5 [00:26&lt;00:39, 13.15s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:5.112 | Rwp:6.474 | Rsquare:5.129
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 3-th iteration
+[array([ 9.41131,  9.41131,  9.41131, 90.     , 90.     , 90.     ]), array([ 4.49676,  4.49676,  3.10435, 90.     , 90.     , 90.     ])]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|███████████████████████████                  | 3/5 [00:39&lt;00:26, 13.12s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:5.021 | Rwp:6.332 | Rsquare:4.872
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 4-th iteration
+[array([ 9.41183,  9.41183,  9.41183, 90.     , 90.     , 90.     ]), array([ 4.49678,  4.49678,  3.10416, 90.     , 90.     , 90.     ])]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████████████████████████████████         | 4/5 [00:52&lt;00:13, 13.16s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:4.946 | Rwp:6.229 | Rsquare:4.704
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/jacob/miniconda3/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:576: calling function (from tensorflow.python.eager.polymorphic_function.polymorphic_function) with experimental_relax_shapes is deprecated and will be removed in a future version.
+Instructions for updating:
+experimental_relax_shapes is deprecated, use reduce_retracing instead
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WPEM 5-th iteration
+[array([ 9.41186,  9.41186,  9.41186, 90.     , 90.     , 90.     ]), array([ 4.49683,  4.49683,  3.10397, 90.     , 90.     , 90.     ])]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████| 5/5 [01:06&lt;00:00, 13.35s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████| 5/5 [01:06&lt;00:00, 13.28s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rp:4.883 | Rwp:6.157 | Rsquare:4.598
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After update the background :   Rp = 2.960 | Rwp = 5.339 | Rsquare = 3.372
+</pre></div>
+</div>
+<img alt="../../_images/b5a72fd26a03dfd34e3bfd3e93d7b3596685ab907d7206dc7e705bfced3c28c6.png" src="../../_images/b5a72fd26a03dfd34e3bfd3e93d7b3596685ab907d7206dc7e705bfced3c28c6.png" />
+<img alt="../../_images/2349a84c851b39ab1defb4a22a91d64c6b6be3ca5ac1cb5e09339f5f1ab4f7da.png" src="../../_images/2349a84c851b39ab1defb4a22a91d64c6b6be3ca5ac1cb5e09339f5f1ab4f7da.png" />
+<img alt="../../_images/23d9c635b98fe46659fb8811232e58dee1e996ab779c61be4eb3f9a226d9ede1.png" src="../../_images/23d9c635b98fe46659fb8811232e58dee1e996ab779c61be4eb3f9a226d9ede1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mass fraction without structure factor estimate in % : [79.88104018906255, 20.118959810937447] 
+ Saved at the result documents
+5-th iterations, reach the maximum number of iteration steps.
+ Rp: 2.960
+Rwp: 5.339 
+
+
+WPEM program running time :  0 hours 1 minute  13 second  
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;0 hours 1 minute  13 second  &#39;,
+ [array([ 9.41186,  9.41186,  9.41186, 90.     , 90.     , 90.     ]),
+  array([ 4.49683,  4.49683,  3.10397, 90.     , 90.     , 90.     ])])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For demonstration purposes, the code uses <code class="docutils literal notranslate"><span class="pre">iter_max</span> <span class="pre">=</span> <span class="pre">5</span></code> to reduce computational cost. However, for practical applications, it is recommended to set <code class="docutils literal notranslate"><span class="pre">iter_max</span></code> to at least 50 for more reliable results.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/multi_phases"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../basic_opt/1st.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The tutorial 1st</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../amorphous/3rd.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The tutorial 3rd</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">coding</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bin CAO
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Author: <a href="https://bin-cao.github.io/">Bin CAO</a><br>
+Advanced Materials Thrust, HKUST(GZ) | Department of Physics, CityU HK
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RefineUI — PyXplore · WPEM（中文版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-base:#070c18;--bg-surface:#0d1526;--bg-card:#111b2e;--bg-card2:#152036;
+  --bg-input:#0c172a;--bg-input-focus:#0f1d36;
+  --border:#1a3050;--border-mid:#234266;--border-focus:#0ea5e9;
+  --accent:#06b6d4;--accent2:#3b82f6;--accent3:#8b5cf6;
+  --green:#10b981;--amber:#f59e0b;--red:#ef4444;
+  --txt:#e8f0fe;--txt2:#94a3b8;--txt3:#4b6080;
+  --code-bg:#060d18;
+  --grad1:linear-gradient(135deg,#06b6d4,#3b82f6);
+  --grad2:linear-gradient(135deg,#8b5cf6,#06b6d4);
+  --glow:0 0 60px rgba(6,182,212,0.12);
+  --r:12px;--rs:8px;--rx:18px;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:'Inter',sans-serif;background:var(--bg-base);color:var(--txt);min-height:100vh;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 90% 60% at 15% -10%,rgba(6,182,212,.07) 0%,transparent 55%),radial-gradient(ellipse 70% 50% at 85% 110%,rgba(59,130,246,.05) 0%,transparent 55%);pointer-events:none;z-index:0}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.hdr{position:sticky;top:0;z-index:200;background:rgba(7,12,24,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.hdr-in{max-width:1360px;margin:0 auto;height:62px;display:flex;align-items:center;gap:1.2rem;padding:0 1.8rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.brand-icon{width:34px;height:34px;background:var(--grad1);border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:.95rem;color:#fff;letter-spacing:-.5px;box-shadow:0 4px 20px rgba(6,182,212,.35)}
+.brand-name{font-size:1.08rem;font-weight:700;color:var(--txt);letter-spacing:-.3px}
+.brand-name em{font-style:normal;color:var(--accent)}
+.badge{font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:999px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.28);color:var(--accent);letter-spacing:.07em;text-transform:uppercase}
+.sp{flex:1}
+.hdr-link{font-size:.8rem;color:var(--txt2);text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:5px 11px;border-radius:var(--rs);transition:all .18s var(--ease)}
+.hdr-link:hover{color:var(--accent);background:rgba(6,182,212,.09)}
+.hdr-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ─── LAYOUT ─────────────────────────────────────────────────── */
+.wrap{max-width:1360px;margin:0 auto;padding:2rem 1.8rem 4rem;position:relative;z-index:1}
+
+/* ─── HERO SECTION ───────────────────────────────────────────── */
+.hero{text-align:center;padding:2.2rem 0 1.8rem;margin-bottom:2rem}
+.hero-title{font-size:2.2rem;font-weight:800;letter-spacing:-.5px;line-height:1.2;margin-bottom:.6rem}
+.hero-title .hi{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--txt2);font-size:.92rem;max-width:560px;margin:0 auto 1.2rem}
+.hero-chips{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.chip{font-size:.72rem;font-weight:500;padding:4px 12px;border-radius:999px;border:1px solid var(--border-mid);color:var(--txt2);background:rgba(13,21,38,.6)}
+.chip.c1{border-color:rgba(6,182,212,.35);color:var(--accent);background:rgba(6,182,212,.07)}
+.chip.c2{border-color:rgba(59,130,246,.35);color:var(--accent2);background:rgba(59,130,246,.07)}
+.chip.c3{border-color:rgba(139,92,246,.35);color:var(--accent3);background:rgba(139,92,246,.07)}
+
+/* ─── TABS ───────────────────────────────────────────────────── */
+.tabs{display:flex;gap:.5rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--rx);padding:.4rem;margin-bottom:2rem}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:.55rem;padding:.65rem 1.2rem;border-radius:calc(var(--rx) - 4px);border:none;background:transparent;color:var(--txt2);font-family:inherit;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .2s var(--ease);position:relative}
+.tab svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+.tab.active{background:var(--bg-card2);color:var(--txt);box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.tab.active.t1{color:var(--accent)}
+.tab.active.t2{color:var(--accent2)}
+
+/* ─── STEP FLOW ──────────────────────────────────────────────── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.step{display:flex;align-items:flex-start;gap:.85rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.25rem;transition:border-color .2s}
+.step:hover{border-color:var(--border-mid)}
+.step-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
+.s1 .step-num{background:rgba(6,182,212,.15);color:var(--accent)}
+.s2 .step-num{background:rgba(59,130,246,.15);color:var(--accent2)}
+.step-title{font-size:.83rem;font-weight:600;margin-bottom:.2rem}
+.step-desc{font-size:.76rem;color:var(--txt2);line-height:1.5}
+
+/* ─── PANEL / CARD ───────────────────────────────────────────── */
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1.5rem;transition:border-color .2s}
+.panel:hover{border-color:var(--border-mid)}
+.panel-hdr{display:flex;align-items:center;gap:.7rem;padding:1rem 1.4rem;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.panel-hdr svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.panel-hdr .ph-icon{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;flex-shrink:0}
+.ic-teal{background:rgba(6,182,212,.12);color:var(--accent)}
+.ic-blue{background:rgba(59,130,246,.12);color:var(--accent2)}
+.ic-purple{background:rgba(139,92,246,.12);color:var(--accent3)}
+.ic-green{background:rgba(16,185,129,.12);color:var(--green)}
+.ic-amber{background:rgba(245,158,11,.12);color:var(--amber)}
+.panel-title{font-size:.92rem;font-weight:600;flex:1}
+.panel-subtitle{font-size:.75rem;color:var(--txt2);margin-top:.05rem}
+.panel-chevron{width:16px;height:16px;stroke:var(--txt3);fill:none;stroke-width:2;transition:transform .22s var(--ease)}
+.panel.open .panel-chevron{transform:rotate(180deg)}
+.panel-body{display:none;padding:1.4rem}
+.panel.open .panel-body{display:block}
+
+/* ─── FILE UPLOAD ZONE ───────────────────────────────────────── */
+.upload-zone{border:2px dashed var(--border-mid);border-radius:var(--r);padding:1.8rem 1.4rem;text-align:center;transition:all .2s var(--ease);cursor:pointer;background:rgba(13,21,38,.4);position:relative}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:rgba(6,182,212,.04)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{width:38px;height:38px;margin:0 auto .8rem;display:grid;place-items:center;background:rgba(6,182,212,.1);border-radius:10px;color:var(--accent)}
+.upload-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+.upload-title{font-size:.9rem;font-weight:600;margin-bottom:.25rem}
+.upload-hint{font-size:.76rem;color:var(--txt2)}
+.upload-types{display:flex;gap:.4rem;justify-content:center;margin-top:.7rem;flex-wrap:wrap}
+.upload-type{font-size:.68rem;padding:2px 8px;border-radius:4px;background:var(--bg-input);border:1px solid var(--border);color:var(--txt2);font-family:'JetBrains Mono',monospace}
+.file-status{margin-top:1rem;display:none}
+.file-status.show{display:block}
+.file-ok{display:flex;align-items:center;gap:.5rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:var(--rs);padding:.6rem .9rem;font-size:.8rem;color:var(--green)}
+.file-err{display:flex;align-items:flex-start;gap:.5rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:var(--rs);padding:.6rem .9rem;font-size:.8rem;color:var(--red)}
+.file-ok svg,.file-err svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;flex-shrink:0;margin-top:.05rem}
+
+/* ─── DATA PREVIEW ───────────────────────────────────────────── */
+.data-preview{margin-top:1rem;display:none;border-radius:var(--rs);overflow:hidden;border:1px solid var(--border)}
+.data-preview.show{display:block}
+.preview-hdr{background:var(--bg-input);padding:.5rem 1rem;font-size:.74rem;font-weight:600;color:var(--txt2);display:flex;justify-content:space-between;align-items:center}
+.preview-table{width:100%;border-collapse:collapse;font-size:.78rem;font-family:'JetBrains Mono',monospace}
+.preview-table th{background:var(--bg-input);padding:.4rem .8rem;color:var(--txt2);font-weight:500;text-align:left;border-bottom:1px solid var(--border)}
+.preview-table td{padding:.35rem .8rem;border-bottom:1px solid rgba(26,48,80,.4);color:var(--txt)}
+.preview-table tr:last-child td{border-bottom:none}
+
+/* ─── PARAM GRID ─────────────────────────────────────────────── */
+.param-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;margin-top:1rem}
+.param-item{background:var(--bg-input);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.1rem;transition:border-color .18s}
+.param-item:focus-within{border-color:var(--border-focus)}
+.param-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem;gap:.5rem}
+.param-name{font-size:.82rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.param-badge{font-size:.64rem;padding:2px 7px;border-radius:999px;font-weight:600;font-family:inherit;white-space:nowrap}
+.pb-req{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:var(--red)}
+.pb-opt{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:var(--green)}
+.pb-adv{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:var(--amber)}
+.param-label{font-size:.78rem;font-weight:500;color:var(--txt);margin-bottom:.1rem}
+.param-desc{font-size:.73rem;color:var(--txt2);line-height:1.5;margin-bottom:.7rem}
+.param-range{font-size:.7rem;color:var(--txt3);margin-top:.3rem;font-family:'JetBrains Mono',monospace}
+label.param-label-outer{display:block;font-size:.78rem;font-weight:500;color:var(--txt);margin-bottom:.4rem}
+
+/* ─── INPUTS ─────────────────────────────────────────────────── */
+input[type=number],input[type=text],select{width:100%;background:var(--bg-card);border:1px solid var(--border);color:var(--txt);border-radius:var(--rs);padding:.55rem .8rem;font-size:.83rem;font-family:inherit;transition:border-color .18s,background .18s;outline:none;-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input:focus,select:focus{border-color:var(--border-focus);background:var(--bg-input-focus)}
+select{cursor:pointer}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.input-with-unit{position:relative;display:flex}
+.input-with-unit input{border-radius:var(--rs) 0 0 var(--rs);flex:1}
+.unit{background:var(--bg-surface);border:1px solid var(--border);border-left:none;border-radius:0 var(--rs) var(--rs) 0;padding:.55rem .7rem;font-size:.77rem;color:var(--txt3);white-space:nowrap;display:flex;align-items:center}
+.wavelength-preset{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
+.wl-btn{font-size:.72rem;padding:4px 10px;border-radius:6px;border:1px solid var(--border-mid);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .15s}
+.wl-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(6,182,212,.07)}
+.wl-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(6,182,212,.12)}
+
+/* ─── BUTTONS ────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1.6rem;border-radius:var(--r);border:none;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s var(--ease);white-space:nowrap}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.btn-primary{background:var(--grad1);color:#fff;box-shadow:0 4px 20px rgba(6,182,212,.3)}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 28px rgba(6,182,212,.4)}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{background:var(--bg-card2);color:var(--txt);border:1px solid var(--border-mid)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--txt2);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--border-mid);color:var(--txt)}
+.btn-sm{padding:.45rem 1rem;font-size:.79rem}
+.btn-icon{padding:.5rem;border-radius:var(--rs)}
+.btn-success{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.btn-success:hover{background:rgba(16,185,129,.22)}
+.action-bar{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;padding-top:1.2rem;border-top:1px solid var(--border)}
+.action-hint{font-size:.75rem;color:var(--txt2);flex:1}
+
+/* ─── CODE OUTPUT ────────────────────────────────────────────── */
+.code-section{margin-top:1.5rem;display:none}
+.code-section.show{display:block}
+.code-hdr{display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;background:rgba(6,12,24,.8);border:1px solid var(--border);border-bottom:none;border-radius:var(--r) var(--r) 0 0}
+.code-lang{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:4px;background:rgba(59,130,246,.15);color:var(--accent2);font-family:'JetBrains Mono',monospace}
+.code-title{font-size:.79rem;color:var(--txt2);flex:1}
+.copy-btn{display:flex;align-items:center;gap:.4rem;font-size:.76rem;padding:4px 10px;border-radius:6px;border:1px solid var(--border-mid);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .15s}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.copy-btn.copied{border-color:var(--green);color:var(--green)}
+.copy-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+.code-box{background:var(--code-bg);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:1.2rem 1.4rem;overflow-x:auto;max-height:500px;overflow-y:auto}
+.code-box pre{font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.7;white-space:pre;color:#c9d1d9}
+/* Syntax colors */
+.kw{color:#ff7b72}.fn{color:#d2a8ff}.st{color:#a5d6ff}
+.cm{color:#8b949e;font-style:italic}.nb{color:#79c0ff}
+.nm{color:#ffa657}.op{color:#ff7b72}
+
+/* ─── LATTICE CONSTANTS ──────────────────────────────────────── */
+.latt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.latt-item{}
+.latt-label{font-size:.74rem;font-weight:600;color:var(--txt2);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
+.latt-label em{font-style:normal;color:var(--txt3);font-size:.68rem}
+.crystal-select{margin-bottom:1rem}
+.crystal-hint{font-size:.74rem;color:var(--txt3);margin-top:.5rem;padding:.5rem .8rem;background:rgba(245,158,11,.06);border-left:2px solid var(--amber);border-radius:0 var(--rs) var(--rs) 0}
+
+/* ─── SECTION DIVIDER ────────────────────────────────────────── */
+.sec-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);margin:1.5rem 0 .8rem;display:flex;align-items:center;gap:.7rem}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-label.c-teal{color:var(--accent)}
+.sec-label.c-blue{color:var(--accent2)}
+.sec-label.c-purple{color:var(--accent3)}
+
+/* ─── INFO BOX ───────────────────────────────────────────────── */
+.info-box{padding:.75rem 1rem;border-radius:var(--rs);font-size:.77rem;line-height:1.55;margin-bottom:1rem}
+.ib-teal{background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);color:#a7f3f9}
+.ib-blue{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);color:#bfdbfe}
+.ib-amber{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);color:#fde68a}
+.ib-green{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);color:#a7f3d0}
+.info-box strong{font-weight:600;display:block;margin-bottom:.2rem}
+
+/* ─── PROGRESS INDICATOR ─────────────────────────────────────── */
+.prog-bar-wrap{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:1.5rem}
+.prog-bar{height:100%;background:var(--grad1);border-radius:2px;transition:width .4s var(--ease);width:0%}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:700px){
+  .latt-grid{grid-template-columns:repeat(2,1fr)}
+  .param-grid{grid-template-columns:1fr}
+  .hero-title{font-size:1.6rem}
+  .tabs{flex-direction:column}
+  .steps{grid-template-columns:1fr}
+}
+
+/* ─── TOOLTIP ────────────────────────────────────────────────── */
+.tooltip-wrap{position:relative;display:inline-flex}
+.tooltip-wrap .tt{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a2942;border:1px solid var(--border-mid);border-radius:8px;padding:.5rem .75rem;font-size:.72rem;color:var(--txt);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:99;max-width:220px;white-space:normal;text-align:center}
+.tooltip-wrap:hover .tt{opacity:1}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg-card)}
+::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#2d5080}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════════ -->
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="#">
+      <div class="brand-icon">Px</div>
+      <span class="brand-name"><em>Py</em>Xplore</span>
+    </a>
+    <span class="badge">RefineUI</span>
+    <div class="sp"></div>
+    <a class="hdr-link" href="https://github.com/Bin-Cao/PyWPEM" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+      PyWPEM 源码
+    </a>
+    <a class="hdr-link" href="https://xqueryer.caobin.asia/" target="_blank">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      物相鉴定
+    </a>
+  </div>
+</header>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════════ -->
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="hero-title"><span class="hi">RefineUI</span> · PyXplore 工具包</h1>
+    <p class="hero-sub">全谱期望最大化算法（WPEM）—— 专业的 XRD 数据背底扣除与晶格常数精修可视化界面。</p>
+    <div class="hero-chips">
+      <span class="chip c1">WPEM 引擎</span>
+      <span class="chip c2">Cu Kα / Mo Kα / Co Kα</span>
+      <span class="chip c3">AI 驱动精修</span>
+      <span class="chip">本地运行 · 无需服务器</span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab t1 active" onclick="switchTab('bac')">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      背底处理
+    </button>
+    <button class="tab t2" onclick="switchTab('ref')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/></svg>
+      晶格精修 (XRD 拟合)
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       TAB 1 : BACKGROUND PROCESSING
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-bac">
+
+    <!-- Workflow steps -->
+    <div class="steps">
+      <div class="step s1">
+        <div class="step-num">1</div>
+        <div><div class="step-title">上传 XRD 数据</div><div class="step-desc">CSV 文件须包含两列：第 1 列为 2θ 角度（°），第 2 列为强度值，无需表头行。</div></div>
+      </div>
+      <div class="step s1">
+        <div class="step-num">2</div>
+        <div><div class="step-title">配置参数</div><div class="step-desc">调整背底拟合参数，将鼠标悬停在各输入框上可查看详细说明。</div></div>
+      </div>
+      <div class="step s1">
+        <div class="step-num">3</div>
+        <div><div class="step-title">生成并运行脚本</div><div class="step-desc">复制生成的 Python 脚本并运行，将输出 <code style="font-family:monospace;font-size:.85em">bac.csv</code> 和 <code style="font-family:monospace;font-size:.85em">no_bac_intensity.csv</code>。</div></div>
+      </div>
+    </div>
+
+    <!-- File Upload Panel -->
+    <div class="panel open" id="panelBacUpload">
+      <div class="panel-hdr" onclick="togglePanel('panelBacUpload')">
+        <div class="ph-icon ic-teal"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div><div class="panel-title">第 1 步 — 上传衍射数据</div><div class="panel-subtitle">intensity.csv · 2 列 · 无表头</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="info-box ib-teal">
+          <strong>📋 文件格式要求</strong>
+          CSV 文件必须包含<strong>恰好 2 列</strong>：第 1 列 = 2θ 角度（度，范围 0–180），第 2 列 = 强度（非负值）。无表头行，分隔符为逗号或空格，典型数据量为 1,000–10,000 行。
+        </div>
+        <div class="upload-zone" id="dropBac" ondragover="handleDrag(event,'dropBac')" ondragleave="handleDragLeave(event,'dropBac')" ondrop="handleDrop(event,'bac')">
+          <input type="file" accept=".csv,.txt,.dat" id="fileBac" onchange="handleFileSelect('bac')">
+          <div class="upload-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div class="upload-title">拖拽或点击上传</div>
+          <div class="upload-hint">intensity.csv — XRD 原始数据文件</div>
+          <div class="upload-types"><span class="upload-type">.csv</span><span class="upload-type">.txt</span><span class="upload-type">.dat</span></div>
+        </div>
+        <div class="file-status" id="statusBac"></div>
+        <div class="data-preview" id="previewBac">
+          <div class="preview-hdr"><span>数据预览（前 6 行）</span><span id="previewBacInfo" style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.72rem"></span></div>
+          <table class="preview-table"><thead><tr><th>#</th><th>2θ (°)</th><th>强度</th></tr></thead><tbody id="previewBacBody"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parameters Panel -->
+    <div class="panel open" id="panelBacParams">
+      <div class="panel-hdr" onclick="togglePanel('panelBacParams')">
+        <div class="ph-icon ic-purple"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
+        <div><div class="panel-title">第 2 步 — BackgroundFit 参数设置</div><div class="panel-subtitle">WPEM.BackgroundFit( intensity_csv, lowAngleRange, poly_n, bac_split, bac_num )</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="param-grid">
+
+          <!-- lowAngleRange -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">lowAngleRange</span><span class="param-badge pb-req">必填</span></div>
+            <div class="param-label">低角截止值（2θ °）</div>
+            <div class="param-desc">背底拟合所包含的最小 2θ 角度（度）。低于此阈值的数据将被排除，以抑制衍射仪中常见的空气散射和仪器低角假峰。若在零角附近观察到陡峭的上升背底，请适当增大该值。</div>
+            <div class="input-with-unit"><input type="number" id="b_lowAngle" value="17" min="0" max="90" step="0.5"><span class="unit">°</span></div>
+            <div class="param-range">范围：0 – 90° · 典型值：5 – 25°</div>
+          </div>
+
+          <!-- poly_n -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">poly_n</span><span class="param-badge pb-req">必填</span></div>
+            <div class="param-label">多项式阶数</div>
+            <div class="param-desc">用于拟合背底曲线的多项式阶数。阶数越高，拟合曲线越能跟随复杂的曲率变化（如非晶驼峰），但同时会增大过拟合和虚假振荡的风险。纯晶体样品建议使用 5–10，非晶含量较高的样品建议使用 10–15。</div>
+            <input type="number" id="b_polyN" value="13" min="1" max="30" step="1">
+            <div class="param-range">范围：1 – 30 · 典型值：8 – 15</div>
+          </div>
+
+          <!-- bac_split -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">bac_split</span><span class="param-badge pb-req">必填</span></div>
+            <div class="param-label">背底锚点分段数</div>
+            <div class="param-desc">用于定义分段背底基线的均匀间隔锚点区域数量。值越大，对背底形状的局部控制越精细，适用于角度范围内背底变化显著的情况。分段过多可能导致过度分割。</div>
+            <input type="number" id="b_bacSplit" value="16" min="2" max="100" step="1">
+            <div class="param-range">范围：2 – 100 · 典型值：8 – 30</div>
+          </div>
+
+          <!-- bac_num -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">bac_num</span><span class="param-badge pb-opt">可选</span></div>
+            <div class="param-label">蒙特卡罗优化步数</div>
+            <div class="param-desc">用于拟合背底多项式的随机优化迭代次数。步数越多，收敛质量越好，但计算时间线性增加。快速探索性拟合可使用 100–200；发表级高精度结果建议使用 500–1000+。</div>
+            <input type="number" id="b_bacNum" value="300" min="50" max="5000" step="50">
+            <div class="param-range">范围：50 – 5000 · 典型值：200 – 600</div>
+          </div>
+
+        </div><!-- /param-grid -->
+
+        <div class="action-bar">
+          <span class="action-hint">参数已填写 · 点击生成 Python 脚本</span>
+          <button class="btn btn-secondary btn-sm" onclick="resetBacParams()">
+            <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9M3 3v4h4"/></svg> 恢复默认值
+          </button>
+          <button class="btn btn-primary" onclick="generateBacCode()">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            生成 Python 代码
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Output -->
+    <div class="code-section" id="codeBac">
+      <div class="code-hdr">
+        <span class="code-lang">Python</span>
+        <span class="code-title">BackgroundFit 脚本 — 在项目目录中直接运行</span>
+        <button class="copy-btn" onclick="copyCode('codeBacPre',this)">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          复制
+        </button>
+      </div>
+      <div class="code-box"><pre id="codeBacPre"></pre></div>
+      <div style="margin-top:.8rem" class="info-box ib-green">
+        <strong>📁 输出文件</strong>
+        运行此脚本后，将创建 <code style="font-family:monospace">ConvertedDocuments/</code> 文件夹。请将 <code style="font-family:monospace">bac.csv</code> 和 <code style="font-family:monospace">no_bac_intensity.csv</code> 复制到工作目录 —— 精修步骤中需要用到这两个文件。
+      </div>
+    </div>
+
+  </div><!-- /tab-bac -->
+
+  <!-- ══════════════════════════════════════════════════════════════
+       TAB 2 : XRD REFINEMENT
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-ref" style="display:none">
+
+    <div class="steps">
+      <div class="step s2"><div class="step-num">1</div><div><div class="step-title">上传所需文件</div><div class="step-desc">上传 intensity.csv、bac.csv、no_bac_intensity.csv（来自背底处理步骤）以及参考结构的 .cif 文件。</div></div></div>
+      <div class="step s2"><div class="step-num">2</div><div><div class="step-title">CIF 预处理</div><div class="step-desc">设置 2θ 范围和波长，CIFpreprocess 将生成峰位文件（xxxHKL.csv，需重命名为 peak0.csv）。</div></div></div>
+      <div class="step s2"><div class="step-num">3</div><div><div class="step-title">晶格常数与精修</div><div class="step-desc">输入初始晶格参数并配置 XRDfit 选项，WPEM 将迭代优化晶体结构。</div></div></div>
+    </div>
+
+    <!-- Files Upload Panel -->
+    <div class="panel open" id="panelRefFiles">
+      <div class="panel-hdr" onclick="togglePanel('panelRefFiles')">
+        <div class="ph-icon ic-blue"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div><div class="panel-title">第 1 步 — 上传数据文件</div><div class="panel-subtitle">intensity.csv · bac.csv · no_bac_intensity.csv · 参考 .cif 文件</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="info-box ib-blue">
+          <strong>📂 精修需要四个文件</strong>
+          文件 1–3 来自背底处理步骤。文件 4（.cif）是目标物相的参考晶体结构文件。若物相未知，请先使用 <a href="https://xqueryer.caobin.asia/" target="_blank" style="color:var(--accent)">XQueryer</a> 物相鉴定工具。
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <!-- intensity.csv -->
+          <div>
+            <label class="param-label-outer">① intensity.csv <span style="color:var(--txt3);font-size:.72rem">（XRD 原始数据）</span></label>
+            <div class="upload-zone" id="dropRI" ondragover="handleDrag(event,'dropRI')" ondragleave="handleDragLeave(event,'dropRI')" ondrop="handleDrop(event,'ri')">
+              <input type="file" accept=".csv,.txt" id="fileRI" onchange="handleFileSelect('ri')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">intensity.csv</div>
+              <div class="upload-hint" style="font-size:.7rem">原始 2θ–强度数据</div>
+            </div>
+            <div class="file-status" id="statusRI"></div>
+          </div>
+          <!-- bac.csv -->
+          <div>
+            <label class="param-label-outer">② bac.csv <span style="color:var(--txt3);font-size:.72rem">（背底数据）</span></label>
+            <div class="upload-zone" id="dropBacF" ondragover="handleDrag(event,'dropBacF')" ondragleave="handleDragLeave(event,'dropBacF')" ondrop="handleDrop(event,'bacf')">
+              <input type="file" accept=".csv,.txt" id="fileBacF" onchange="handleFileSelect('bacf')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">bac.csv</div>
+              <div class="upload-hint" style="font-size:.7rem">来自 ConvertedDocuments/</div>
+            </div>
+            <div class="file-status" id="statusBacF"></div>
+          </div>
+          <!-- no_bac_intensity.csv -->
+          <div>
+            <label class="param-label-outer">③ no_bac_intensity.csv <span style="color:var(--txt3);font-size:.72rem">（扣除背底后的数据）</span></label>
+            <div class="upload-zone" id="dropNB" ondragover="handleDrag(event,'dropNB')" ondragleave="handleDragLeave(event,'dropNB')" ondrop="handleDrop(event,'nb')">
+              <input type="file" accept=".csv,.txt" id="fileNB" onchange="handleFileSelect('nb')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">no_bac_intensity.csv</div>
+              <div class="upload-hint" style="font-size:.7rem">来自 ConvertedDocuments/</div>
+            </div>
+            <div class="file-status" id="statusNB"></div>
+          </div>
+          <!-- .cif file -->
+          <div>
+            <label class="param-label-outer">④ 参考 .cif 文件 <span style="color:var(--txt3);font-size:.72rem">（晶体结构文件）</span></label>
+            <div class="upload-zone" id="dropCIF" ondragover="handleDrag(event,'dropCIF')" ondragleave="handleDragLeave(event,'dropCIF')" ondrop="handleDrop(event,'cif')">
+              <input type="file" accept=".cif" id="fileCIF" onchange="handleFileSelect('cif')">
+              <div class="upload-icon" style="width:28px;height:28px;margin-bottom:.4rem;background:rgba(139,92,246,.12);color:var(--accent3)"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+              <div class="upload-title" style="font-size:.78rem">Structure.cif</div>
+              <div class="upload-hint" style="font-size:.7rem">例如 Mn2O3.cif · 来自 ICSD/COD</div>
+            </div>
+            <div class="file-status" id="statusCIF"></div>
+          </div>
+        </div><!-- /grid -->
+      </div>
+    </div><!-- /panel -->
+
+    <!-- CIF + Wavelength Panel -->
+    <div class="panel open" id="panelCIF">
+      <div class="panel-hdr" onclick="togglePanel('panelCIF')">
+        <div class="ph-icon ic-purple"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <div><div class="panel-title">第 2 步 — CIF 预处理与波长设置</div><div class="panel-subtitle">WPEM.CIFpreprocess( filepath, two_theta_range ) &amp; X 射线源波长</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+
+        <div class="sec-label c-purple">CIF 预处理参数</div>
+        <div class="param-grid">
+
+          <!-- CIF filepath -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">filepath</span><span class="param-badge pb-req">必填</span></div>
+            <div class="param-label">CIF 文件名</div>
+            <div class="param-desc">参考晶体结构文件的文件名（CIF 格式），必须与 Python 脚本位于同一工作目录下。可从 ICSD、COD 或 Materials Project 等晶体学数据库获取。示例：<code style="font-size:.85em;font-family:monospace">Mn2O3.cif</code></div>
+            <input type="text" id="r_cifName" placeholder="例如 Mn2O3.cif" value="Mn2O3.cif">
+          </div>
+
+          <!-- two_theta_range min -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">two_theta_range</span><span class="param-badge pb-req">必填</span></div>
+            <div class="param-label">2θ 角度范围（最小值, 最大值）</div>
+            <div class="param-desc">用于从 CIF 文件生成理论峰位列表（HKL 文件）的角度窗口（单位：度）。此范围应与实测数据范围一致或略宽。超出此窗口的衍射峰将被排除在拟合之外。</div>
+            <div class="input-row">
+              <div class="input-with-unit"><input type="number" id="r_ttMin" value="15" min="0" max="175" step="1"><span class="unit">° 最小</span></div>
+              <div class="input-with-unit"><input type="number" id="r_ttMax" value="75" min="5" max="180" step="1"><span class="unit">° 最大</span></div>
+            </div>
+            <div class="param-range">典型值：(10, 80) · 须与实测范围匹配</div>
+          </div>
+
+        </div>
+
+        <div class="sec-label c-blue" style="margin-top:1.6rem">X 射线源波长</div>
+        <div class="info-box ib-blue">
+          <strong>⚡ 选择 X 射线源或手动输入自定义波长</strong>
+          波长列表 [λ₁, λ₂] 分别指定 X 射线源的主（Kα₁）和次（Kα₂）发射线波长，单位为埃（Å）。对于同步辐射单色光源，可将两个值均设为单色波长（即 λ₂ = λ₁）。
+        </div>
+        <div class="wavelength-preset">
+          <button class="wl-btn active" onclick="setWavelength(1.540593,1.544414,this)">Cu Kα (1.5406 / 1.5444 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(0.709300,0.713590,this)">Mo Kα (0.7093 / 0.7136 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(1.788965,1.792850,this)">Co Kα (1.7890 / 1.7929 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(2.289760,2.293606,this)">Cr Kα (2.2898 / 2.2936 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(1.937355,1.941330,this)">Fe Kα (1.9374 / 1.9413 Å)</button>
+          <button class="wl-btn" onclick="setWavelength(1.03,1.03,this)">Synchrotron (1.03 Å)</button>
+        </div>
+        <div class="param-grid" style="grid-template-columns:1fr 1fr">
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">wavelength[0]</span><span class="param-badge pb-req">λ₁ Kα₁</span></div>
+            <div class="param-label">主波长 (Kα₁)</div>
+            <div class="param-desc">X 射线源的主发射波长，单位为埃（Å）。Kα₁ 是波长较短的主要成分，贡献了衍射信号的大部分强度。</div>
+            <div class="input-with-unit"><input type="number" id="r_wl1" value="1.540593" min="0.1" max="5" step="0.000001"><span class="unit">Å</span></div>
+          </div>
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">wavelength[1]</span><span class="param-badge pb-opt">λ₂ Kα₂</span></div>
+            <div class="param-label">次波长 (Kα₂)</div>
+            <div class="param-desc">次发射波长，单位为埃（Å）。Kα₂ 波长略长，强度约为 Kα₁ 的 50%，在高角度处会引起峰分裂。对于同步辐射单色光源，应将其设为与 λ₁ 相同的值。</div>
+            <div class="input-with-unit"><input type="number" id="r_wl2" value="1.544414" min="0.1" max="5" step="0.000001"><span class="unit">Å</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /CIF panel -->
+
+    <!-- Lattice Constants Panel -->
+    <div class="panel open" id="panelLatt">
+      <div class="panel-hdr" onclick="togglePanel('panelLatt')">
+        <div class="ph-icon ic-amber"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div><div class="panel-title">第 3 步 — 初始晶格常数</div><div class="panel-subtitle">Lattice_constants = [a, b, c, α, β, γ] — WPEM 精修的初始猜测值</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+        <div class="crystal-select">
+          <label class="param-label-outer">晶系约束 <span style="color:var(--txt3);font-size:.72rem">（自动锁定等价角度）</span></label>
+          <select id="r_crystSys" onchange="applyCrystalConstraint()">
+            <option value="triclinic">三斜晶系 — a≠b≠c, α≠β≠γ≠90°</option>
+            <option value="monoclinic">单斜晶系 — a≠b≠c, α=γ=90°, β≠90°</option>
+            <option value="orthorhombic">正交晶系 — a≠b≠c, α=β=γ=90°</option>
+            <option value="tetragonal">四方晶系 — a=b≠c, α=β=γ=90°</option>
+            <option value="rhombohedral">菱方晶系 — a=b=c, α=β=γ≠90°</option>
+            <option value="hexagonal">六方晶系 — a=b≠c, α=β=90°, γ=120°</option>
+            <option value="cubic" selected>立方晶系 — a=b=c, α=β=γ=90°</option>
+          </select>
+          <div class="crystal-hint">💡 选择晶系后，对称等价的晶格参数将自动关联锁定。下方初始值可从 CIFpreprocess 输出读取，也可手动输入。</div>
+        </div>
+        <div class="latt-grid">
+          <div class="latt-item"><div class="latt-label">a <em>(Å)</em></div><div class="input-with-unit"><input type="number" id="la" value="9.41" min="0.1" step="0.001"><span class="unit">Å</span></div></div>
+          <div class="latt-item"><div class="latt-label">b <em>(Å)</em></div><div class="input-with-unit"><input type="number" id="lb" value="9.41" min="0.1" step="0.001"><span class="unit">Å</span></div></div>
+          <div class="latt-item"><div class="latt-label">c <em>(Å)</em></div><div class="input-with-unit"><input type="number" id="lc" value="9.41" min="0.1" step="0.001"><span class="unit">Å</span></div></div>
+          <div class="latt-item"><div class="latt-label">α <em>(°)</em></div><div class="input-with-unit"><input type="number" id="lalpha" value="90" min="1" max="179" step="0.01"><span class="unit">°</span></div></div>
+          <div class="latt-item"><div class="latt-label">β <em>(°)</em></div><div class="input-with-unit"><input type="number" id="lbeta" value="90" min="1" max="179" step="0.01"><span class="unit">°</span></div></div>
+          <div class="latt-item"><div class="latt-label">γ <em>(°)</em></div><div class="input-with-unit"><input type="number" id="lgamma" value="90" min="1" max="179" step="0.01"><span class="unit">°</span></div></div>
+        </div>
+      </div>
+    </div><!-- /Lattice panel -->
+
+    <!-- XRDfit Parameters Panel -->
+    <div class="panel open" id="panelXRDfit">
+      <div class="panel-hdr" onclick="togglePanel('panelXRDfit')">
+        <div class="ph-icon ic-teal"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="panel-title">第 4 步 — XRDfit 精修参数</div><div class="panel-subtitle">WPEM.XRDfit( wavelength, var, Lattice_constants, no_bac_file, original_file, bac_file, … )</div></div>
+        <svg class="panel-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="panel-body">
+
+        <div class="sec-label c-teal">拟合范围与角度窗口</div>
+        <div class="param-grid">
+
+          <!-- low_bound -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">low_bound</span><span class="param-badge pb-req">必填</span></div>
+            <div class="param-label">2θ 拟合下限（°）</div>
+            <div class="param-desc">XRD 谱型拟合窗口的最小 2θ 角度（单位：度）。低于此角度的峰将被排除在残差最小化之外。建议设置为略高于背底处理中所用 <code style="font-family:monospace;font-size:.85em">lowAngleRange</code> 的值，以避免背底伪峰进入拟合。</div>
+            <div class="input-with-unit"><input type="number" id="r_lowBound" value="20" min="0" max="170" step="1"><span class="unit">°</span></div>
+            <div class="param-range">典型值：15 – 30° · 须大于 lowAngleRange</div>
+          </div>
+
+          <!-- up_bound -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">up_bound</span><span class="param-badge pb-req">必填</span></div>
+            <div class="param-label">2θ 拟合上限（°）</div>
+            <div class="param-desc">拟合窗口的最大 2θ 角度（单位：度），应与实测数据的角度上限一致或略低。更高角度能为晶格参数（d 间距）提供更多约束，但在实验室衍射仪中也会放大噪声。</div>
+            <div class="input-with-unit"><input type="number" id="r_upBound" value="70" min="10" max="179" step="1"><span class="unit">°</span></div>
+            <div class="param-range">典型值：60 – 120° · 须小于 two_theta_range 最大值</div>
+          </div>
+
+        </div>
+
+        <div class="sec-label c-teal" style="margin-top:1.4rem">WPEM 优化参数</div>
+        <div class="param-grid">
+
+          <!-- subset_number -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">subset_number</span><span class="param-badge pb-opt">可选</span></div>
+            <div class="param-label">WPEM 子集数量</div>
+            <div class="param-desc">期望最大化（EM）算法每次迭代中随机采样的子谱数量，相当于机器学习中的"mini-batch 大小"。值越大，参数更新的统计鲁棒性越高，但每次迭代所需内存和时间也随之增加。</div>
+            <input type="number" id="r_subsetN" value="11" min="1" max="200" step="1">
+            <div class="param-range">范围：1 – 200 · 典型值：5 – 20</div>
+          </div>
+
+          <!-- iter_max -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">iter_max</span><span class="param-badge pb-opt">可选</span></div>
+            <div class="param-label">最大 EM 迭代次数</div>
+            <div class="param-desc">外层 EM（期望最大化）循环的最大次数。每次迭代更新晶格常数和峰形参数。若提前达到收敛，WPEM 将自动停止。对于复杂多相体系或严重畸变结构，可适当增大此值。</div>
+            <input type="number" id="r_iterMax" value="5" min="1" max="500" step="1">
+            <div class="param-range">范围：1 – 500 · 典型值：5 – 30</div>
+          </div>
+
+          <!-- bta -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">bta</span><span class="param-badge pb-opt">可选</span></div>
+            <div class="param-label">EM 收敛速率 (β)</div>
+            <div class="param-desc">控制 EM 参数更新的学习率，类似于优化中的动量参数。值越接近 1.0，收敛越慢但越稳定；值越接近 0.5，收敛越快但可能振荡。对于噪声较大的数据，建议使用较高的 β（0.85–0.95）。</div>
+            <input type="number" id="r_bta" value="0.85" min="0.1" max="1.0" step="0.01">
+            <div class="param-range">范围：0.1 – 1.0 · 典型值：0.75 – 0.95</div>
+          </div>
+
+          <!-- asy_C -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">asy_C</span><span class="param-badge pb-adv">高级</span></div>
+            <div class="param-label">峰形不对称系数</div>
+            <div class="param-desc">用于修正衍射仪光束轴向发散引起的峰形不对称性的系数。对于对称 Voigt 峰（大多数情况），设为 0 即可。正值模拟低角度不对称性（峰向低 2θ 方向拉伸），适用于高分辨率或高计数率测量。</div>
+            <input type="number" id="r_asyC" value="0" min="-5" max="5" step="0.1">
+            <div class="param-range">范围：−5 到 5 · 默认值：0（对称）</div>
+          </div>
+
+          <!-- InitializationEpoch -->
+          <div class="param-item">
+            <div class="param-top"><span class="param-name">InitializationEpoch</span><span class="param-badge pb-adv">高级</span></div>
+            <div class="param-label">预训练初始化轮次</div>
+            <div class="param-desc">在 EM 精修开始前，用于初始化 WPEM 内部峰形模型的神经网络预训练轮次数。设为 0 时使用 WPEM 内置默认 Voigt 初始化。对于复杂峰形或默认初始化失败的情况，可增大此值（如 100–500）。</div>
+            <input type="number" id="r_initEpoch" value="0" min="0" max="5000" step="10">
+            <div class="param-range">范围：0 – 5000 · 默认值：0</div>
+          </div>
+
+          <!-- subset_number note -->
+          <div class="param-item" style="border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.04)">
+            <div class="param-top"><span class="param-name" style="color:var(--txt2)">输出文件</span></div>
+            <div class="param-label" style="color:var(--txt2)">精修结果保存位置</div>
+            <div class="param-desc">精修完成后，结果保存在 <code style="font-family:monospace">WPEMFittingResults/</code> 文件夹中：
+              <br>• <code style="font-family:monospace">CrystalSystem0_WPEMout.csv</code> — 分解后的峰强度
+              <br>• 精修后的晶格常数输出至控制台（含 Rp、Rwp、Rsquare 等指标）
+              <br>• 拟合图像以 PNG 格式保存</div>
+          </div>
+
+        </div>
+
+        <div class="action-bar">
+          <span class="action-hint">确认以上所有参数 · 点击生成完整 Python 脚本</span>
+          <button class="btn btn-secondary btn-sm" onclick="resetRefParams()">
+            <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9M3 3v4h4"/></svg> 恢复默认值
+          </button>
+          <button class="btn btn-primary" onclick="generateRefCode()">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            生成完整 Python 脚本
+          </button>
+        </div>
+      </div>
+    </div><!-- /XRDfit panel -->
+
+    <!-- Refinement Code Output -->
+    <div class="code-section" id="codeRef">
+      <div class="code-hdr">
+        <span class="code-lang">Python</span>
+        <span class="code-title">完整 XRD 精修脚本 — CIFpreprocess + XRDfit</span>
+        <button class="copy-btn" onclick="copyCode('codeRefPre',this)">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          复制
+        </button>
+      </div>
+      <div class="code-box"><pre id="codeRefPre"></pre></div>
+      <div style="margin-top:.8rem" class="info-box ib-amber">
+        <strong>⚠️ 运行前注意</strong>
+        请确保所有四个文件均与脚本位于同一目录下。运行 CIFpreprocess 后，脚本将自动把 <code style="font-family:monospace">output_xrd/xxxHKL.csv</code> 复制并重命名为 <code style="font-family:monospace">peak0.csv</code>。完整脚本将按顺序执行上述两个步骤。
+      </div>
+    </div>
+
+  </div><!-- /tab-ref -->
+
+</div><!-- /wrap -->
+
+<script>
+/* ─────────────────────────────────────────────────────
+   TAB SWITCHING
+───────────────────────────────────────────────────── */
+function switchTab(t){
+  document.getElementById('tab-bac').style.display = t==='bac'?'block':'none';
+  document.getElementById('tab-ref').style.display = t==='ref'?'block':'none';
+  document.querySelectorAll('.tab').forEach(b=>{
+    b.classList.toggle('active', (t==='bac'&&b.classList.contains('t1'))||(t==='ref'&&b.classList.contains('t2')));
+  });
+}
+
+/* ─────────────────────────────────────────────────────
+   PANEL COLLAPSE
+───────────────────────────────────────────────────── */
+function togglePanel(id){
+  const p=document.getElementById(id);
+  p.classList.toggle('open');
+}
+
+/* ─────────────────────────────────────────────────────
+   DRAG & DROP
+───────────────────────────────────────────────────── */
+function handleDrag(e,id){e.preventDefault();document.getElementById(id).classList.add('drag');}
+function handleDragLeave(e,id){document.getElementById(id).classList.remove('drag');}
+function handleDrop(e,key){
+  e.preventDefault();
+  const map={bac:'fileBac',ri:'fileRI',bacf:'fileBacF',nb:'fileNB',cif:'fileCIF'};
+  const idMap={bac:'dropBac',ri:'dropRI',bacf:'dropBacF',nb:'dropNB',cif:'dropCIF'};
+  document.getElementById(idMap[key]).classList.remove('drag');
+  const files=e.dataTransfer.files;
+  if(files.length){
+    const dt=new DataTransfer();
+    dt.items.add(files[0]);
+    document.getElementById(map[key]).files=dt.files;
+    handleFileSelect(key);
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   FILE VALIDATION
+───────────────────────────────────────────────────── */
+const fileData={};
+
+function handleFileSelect(key){
+  const idMap={bac:'fileBac',ri:'fileRI',bacf:'fileBacF',nb:'fileNB',cif:'fileCIF'};
+  const statusMap={bac:'statusBac',ri:'statusRI',bacf:'statusBacF',nb:'statusNB',cif:'statusCIF'};
+  const inp=document.getElementById(idMap[key]);
+  if(!inp.files||!inp.files[0])return;
+  const file=inp.files[0];
+  const statusEl=document.getElementById(statusMap[key]);
+  statusEl.className='file-status show';
+
+  if(key==='cif'){
+    validateCIF(file,statusEl,key);
+  } else {
+    validateCSV(file,statusEl,key);
+  }
+}
+
+function svgOk(){return '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';}
+function svgErr(){return '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';}
+
+function validateCIF(file,el,key){
+  if(!file.name.toLowerCase().endsWith('.cif')){
+    el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>文件类型无效</strong> — 请上传 .cif 格式的晶体结构文件（Crystallographic Information File）</div></div>`;
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const txt=e.target.result;
+    const hasCIF=txt.includes('_cell_length_a')||txt.includes('data_')||txt.includes('_atom_site');
+    if(!hasCIF){
+      el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>CIF 格式无法识别</strong> — 文件中未检测到标准 CIF 关键字，可能不是有效的 CIF 文件，请检查文件来源。</div></div>`;
+      return;
+    }
+    // try to extract cell param
+    const match=txt.match(/_cell_length_a\s+([\d.]+)/);
+    let extra='';
+    if(match) extra=` · a = ${parseFloat(match[1]).toFixed(4)} Å`;
+    // update CIF name field
+    document.getElementById('r_cifName').value=file.name;
+    fileData[key]=true;
+    el.innerHTML=`<div class="file-ok">${svgOk()}<div><strong>${file.name}</strong> 验证通过 — 已检测到 CIF 结构文件${extra}。大小：${(file.size/1024).toFixed(1)} KB</div></div>`;
+  };
+  reader.readAsText(file);
+}
+
+function validateCSV(file,el,key){
+  // Extension check
+  const ext=file.name.split('.').pop().toLowerCase();
+  if(!['csv','txt','dat'].includes(ext)){
+    el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>不支持的文件类型（.${ext}）</strong> — 请上传包含 2θ 和强度列的 .csv、.txt 或 .dat 文件。</div></div>`;
+    return;
+  }
+  if(file.size>50*1024*1024){
+    el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>文件过大（${(file.size/1024/1024).toFixed(1)} MB）</strong> — 最大支持文件大小为 50 MB。</div></div>`;
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const lines=e.target.result.split('\n').filter(l=>l.trim());
+    if(lines.length<5){el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>数据行数过少（${lines.length} 行）</strong> — 至少需要 5 个数据点。</div></div>`;return;}
+    // detect delimiter
+    const sample=lines[0].trim();
+    const delim=sample.includes(',')?',':(/\t/.test(sample)?'\t':' ');
+    const errors=[];let cols0=null;
+    const previewRows=[];
+    let thetaMin=Infinity,thetaMax=-Infinity,intMin=Infinity,intMax=-Infinity;
+    for(let i=0;i<Math.min(lines.length,500);i++){
+      const parts=lines[i].trim().split(delim).map(p=>p.trim()).filter(p=>p!=='');
+      if(i===0){cols0=parts.length;}
+      if(parts.length<2){errors.push(`第 ${i+1} 行：列数少于 2 列（检测到 ${parts.length} 列）`);if(errors.length>3)break;continue;}
+      if(parts.length!==cols0)errors.push(`第 ${i+1} 行：列数不一致`);
+      const th=parseFloat(parts[0]),it=parseFloat(parts[1]);
+      if(isNaN(th))errors.push(`第 ${i+1} 行：2θ 值 "${parts[0]}" 不是有效数字`);
+      if(isNaN(it))errors.push(`第 ${i+1} 行：强度值 "${parts[1]}" 不是有效数字`);
+      if(!isNaN(th)&&!isNaN(it)){
+        if(th<thetaMin)thetaMin=th;if(th>thetaMax)thetaMax=th;
+        if(it<intMin)intMin=it;if(it>intMax)intMax=it;
+        if(i<6)previewRows.push([i+1,th.toFixed(4),it.toFixed(2)]);
+      }
+      if(errors.length>5)break;
+    }
+    if(errors.length){
+      el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>发现验证错误：</strong><ul style="margin:.3rem 0 0 1rem">${errors.slice(0,5).map(e=>`<li>${e}</li>`).join('')}${errors.length>5?`<li>… 以及另外 ${errors.length-5} 个错误</li>`:''}</ul></div></div>`;
+      return;
+    }
+    if(thetaMin<0||thetaMax>180){errors.push(`2θ 范围 [${thetaMin.toFixed(2)}, ${thetaMax.toFixed(2)}°] 超出物理范围 [0°, 180°]`);}
+    if(intMin<0){errors.push(`检测到负强度值（最小值：${intMin.toFixed(2)}）— 请检查数据符号`);}
+    if(errors.length){el.innerHTML=`<div class="file-err">${svgErr()}<div><strong>数据质量警告：</strong><ul style="margin:.3rem 0 0 1rem">${errors.map(e=>`<li>${e}</li>`).join('')}</ul></div></div>`;return;}
+    fileData[key]={rows:lines.length,thetaMin,thetaMax,intMin,intMax};
+    el.innerHTML=`<div class="file-ok">${svgOk()}<div><strong>${file.name}</strong> · ${lines.length} 行 · 2θ: ${thetaMin.toFixed(2)}°–${thetaMax.toFixed(2)}° · 强度: ${intMin.toFixed(0)}–${intMax.toFixed(0)}</div></div>`;
+    if(key==='bac'){showPreview(previewRows,thetaMin,thetaMax,lines.length);}
+  };
+  reader.readAsText(file);
+}
+
+function showPreview(rows,tMin,tMax,total){
+  const el=document.getElementById('previewBac');
+  const tbody=document.getElementById('previewBacBody');
+  document.getElementById('previewBacInfo').textContent=`共 ${total} 行 · 2θ ${tMin.toFixed(2)}°–${tMax.toFixed(2)}°`;
+  tbody.innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+  el.classList.add('show');
+}
+</script>
+
+<script>
+/* ─────────────────────────────────────────────────────
+   WAVELENGTH PRESETS
+───────────────────────────────────────────────────── */
+function setWavelength(l1,l2,btn){
+  document.getElementById('r_wl1').value=l1;
+  document.getElementById('r_wl2').value=l2;
+  document.querySelectorAll('.wl-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ─────────────────────────────────────────────────────
+   CRYSTAL SYSTEM CONSTRAINTS
+───────────────────────────────────────────────────── */
+function applyCrystalConstraint(){
+  const sys=document.getElementById('r_crystSys').value;
+  const a=document.getElementById('la'),b=document.getElementById('lb'),c=document.getElementById('lc');
+  const alpha=document.getElementById('lalpha'),beta=document.getElementById('lbeta'),gamma=document.getElementById('lgamma');
+  // Reset disabled
+  [a,b,c,alpha,beta,gamma].forEach(el=>{el.disabled=false;el.style.opacity='1';});
+  const lock=(el,val)=>{el.value=val;el.disabled=true;el.style.opacity='.5';};
+  const sync=(src,tgt)=>{tgt.value=src.value;tgt.disabled=true;tgt.style.opacity='.5';};
+  if(sys==='cubic'){sync(a,b);sync(a,c);lock(alpha,90);lock(beta,90);lock(gamma,90);}
+  else if(sys==='tetragonal'){sync(a,b);lock(alpha,90);lock(beta,90);lock(gamma,90);}
+  else if(sys==='orthorhombic'){lock(alpha,90);lock(beta,90);lock(gamma,90);}
+  else if(sys==='hexagonal'){sync(a,b);lock(alpha,90);lock(beta,90);lock(gamma,120);}
+  else if(sys==='rhombohedral'){sync(a,b);sync(a,c);}
+  else if(sys==='monoclinic'){lock(alpha,90);lock(gamma,90);}
+  // triclinic: all free
+}
+
+// sync cubic a→b,c on input
+document.addEventListener('DOMContentLoaded',()=>{
+  ['la'].forEach(id=>{
+    document.getElementById(id).addEventListener('input',function(){
+      const sys=document.getElementById('r_crystSys').value;
+      if(sys==='cubic'){document.getElementById('lb').value=this.value;document.getElementById('lc').value=this.value;}
+      else if(sys==='tetragonal'){document.getElementById('lb').value=this.value;}
+      else if(sys==='hexagonal'||sys==='rhombohedral'){document.getElementById('lb').value=this.value;if(sys==='rhombohedral')document.getElementById('lc').value=this.value;}
+    });
+  });
+  applyCrystalConstraint();
+});
+
+/* ─────────────────────────────────────────────────────
+   RESET DEFAULTS
+───────────────────────────────────────────────────── */
+function resetBacParams(){
+  document.getElementById('b_lowAngle').value=17;
+  document.getElementById('b_polyN').value=13;
+  document.getElementById('b_bacSplit').value=16;
+  document.getElementById('b_bacNum').value=300;
+}
+function resetRefParams(){
+  document.getElementById('r_lowBound').value=20;
+  document.getElementById('r_upBound').value=70;
+  document.getElementById('r_subsetN').value=11;
+  document.getElementById('r_iterMax').value=5;
+  document.getElementById('r_bta').value=0.85;
+  document.getElementById('r_asyC').value=0;
+  document.getElementById('r_initEpoch').value=0;
+  document.getElementById('r_wl1').value=1.540593;
+  document.getElementById('r_wl2').value=1.544414;
+  document.getElementById('r_crystSys').value='cubic';
+  document.getElementById('la').value=9.41;
+  applyCrystalConstraint();
+  setWavelength(1.540593,1.544414,document.querySelector('.wl-btn'));
+}
+
+/* ─────────────────────────────────────────────────────
+   COPY CODE
+───────────────────────────────────────────────────── */
+function copyCode(preId,btn){
+  const txt=document.getElementById(preId).textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const orig=btn.innerHTML;
+    btn.innerHTML=`<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 已复制！`;
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML=orig;btn.classList.remove('copied');},2200);
+  });
+}
+
+/* ─────────────────────────────────────────────────────
+   SYNTAX HIGHLIGHT HELPER
+───────────────────────────────────────────────────── */
+function hl(code){
+  return code
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    // Comments
+    .replace(/(#[^\n]*)/g,'<span class="cm">$1</span>')
+    // Strings
+    .replace(/(&#39;[^&#39;]*&#39;|&quot;[^&quot;]*&quot;)/g,'<span class="st">$1</span>')
+    // Keywords
+    .replace(/\b(from|import|as|True|False|None)\b/g,'<span class="kw">$1</span>')
+    // Functions/methods
+    .replace(/\b(BackgroundFit|CIFpreprocess|XRDfit|read_csv|print)\b/g,'<span class="fn">$1</span>')
+    // Numbers
+    .replace(/\b(\d+\.?\d*)\b/g,'<span class="nm">$1</span>')
+    // Builtins
+    .replace(/\b(pd|WPEM|np)\b/g,'<span class="nb">$1</span>');
+}
+
+/* ─────────────────────────────────────────────────────
+   GENERATE BACKGROUND FIT CODE
+───────────────────────────────────────────────────── */
+function generateBacCode(){
+  const lowAngle = document.getElementById('b_lowAngle').value;
+  const polyN    = document.getElementById('b_polyN').value;
+  const bacSplit = document.getElementById('b_bacSplit').value;
+  const bacNum   = document.getElementById('b_bacNum').value;
+
+  const code = `# ============================================================
+#  PyXplore · 背底拟合脚本（BackgroundFit）
+#  由 RefineUI 生成 · https://github.com/Bin-Cao/PyWPEM
+# ============================================================
+
+# 第 1 步 — 导入依赖库
+from PyXplore import WPEM
+import pandas as pd
+
+# 第 2 步 — 加载原始 XRD 数据
+#   文件格式：2 列，无表头行
+#   第 1 列 = 2θ（度），第 2 列 = 强度
+intensity_csv = pd.read_csv(r'intensity.csv', header=None)
+
+# 第 3 步 — 执行背底拟合
+#   参数说明：
+#     intensity_csv  : 包含 [2θ, 强度] 列的 DataFrame
+#     lowAngleRange  : 拟合最小 2θ = ${lowAngle}°
+#                      （排除低角度散射伪峰）
+#     poly_n         : 多项式阶数 = ${polyN}
+#                      （阶数越高 → 背底曲线越灵活）
+#     bac_split      : 背底锚点分段数 = ${bacSplit}
+#                      （分段越多 → 局部控制越精细）
+#     bac_num        : 蒙特卡罗优化步数 = ${bacNum}
+#                      （步数越多 → 拟合越好，计算越慢）
+var = WPEM.BackgroundFit(
+    intensity_csv,
+    lowAngleRange=${lowAngle},
+    poly_n=${polyN},
+    bac_split=${bacSplit},
+    bac_num=${bacNum}
+)
+
+# 第 4 步 — 查看输出
+#   运行后将创建 'ConvertedDocuments/' 文件夹。
+#   请将以下 2 个文件复制到工作目录：
+#     - ConvertedDocuments/bac.csv              （背底曲线）
+#     - ConvertedDocuments/no_bac_intensity.csv  （扣除背底后的数据）
+
+print("背底处理完成。")
+print("下一步：将 bac.csv 和 no_bac_intensity.csv 复制到根目录。")
+`;
+  const pre=document.getElementById('codeBacPre');
+  pre.innerHTML=hl(code);
+  const sec=document.getElementById('codeBac');
+  sec.classList.add('show');
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+
+<script>
+/* ─────────────────────────────────────────────────────
+   GENERATE REFINEMENT CODE
+───────────────────────────────────────────────────── */
+function generateRefCode(){
+  const cifName   = document.getElementById('r_cifName').value||'Structure.cif';
+  const ttMin     = document.getElementById('r_ttMin').value;
+  const ttMax     = document.getElementById('r_ttMax').value;
+  const wl1       = document.getElementById('r_wl1').value;
+  const wl2       = document.getElementById('r_wl2').value;
+  const la        = document.getElementById('la').value;
+  const lb        = document.getElementById('lb').value;
+  const lc        = document.getElementById('lc').value;
+  const lalpha    = document.getElementById('lalpha').value;
+  const lbeta     = document.getElementById('lbeta').value;
+  const lgamma    = document.getElementById('lgamma').value;
+  const lowBound  = document.getElementById('r_lowBound').value;
+  const upBound   = document.getElementById('r_upBound').value;
+  const subsetN   = document.getElementById('r_subsetN').value;
+  const iterMax   = document.getElementById('r_iterMax').value;
+  const bta       = document.getElementById('r_bta').value;
+  const asyC      = document.getElementById('r_asyC').value;
+  const initEp    = document.getElementById('r_initEpoch').value;
+  const cifBase   = cifName.replace('.cif','');
+
+  // Read BackgroundFit params from the background tab (share the DOM)
+  const bacLowAngle = (document.getElementById('b_lowAngle')||{value:'17'}).value;
+  const bacPolyN    = (document.getElementById('b_polyN')||{value:'13'}).value;
+  const bacSplit    = (document.getElementById('b_bacSplit')||{value:'16'}).value;
+  const bacNum      = (document.getElementById('b_bacNum')||{value:'300'}).value;
+  const crystSys    = document.getElementById('r_crystSys');
+  const crystLabel  = crystSys ? crystSys.options[crystSys.selectedIndex].text.split('\u2014')[0].trim() : 'Cubic';
+
+  const code = `# ============================================================
+#  PyXplore · 完整 XRD 精修脚本
+#  由 RefineUI 生成 · https://github.com/Bin-Cao/PyWPEM
+# ============================================================
+#
+#  工作流程：
+#    阶段 1  — 背底处理       (WPEM.BackgroundFit)
+#    阶段 2  — CIF 预处理     (WPEM.CIFpreprocess)
+#    自动步骤 — 复制 HKL → peak0.csv（脚本自动完成）
+#    阶段 3  — XRD 精修       (WPEM.XRDfit)
+#
+#  文件布局（所有文件须与本脚本位于同一目录）：
+#    intensity.csv          — 原始 XRD 测量数据
+#    ${cifName}  — 参考晶体结构文件（来自 ICSD/COD）
+# ============================================================
+
+# 第 1 步 — 导入依赖库
+from PyXplore import WPEM
+import pandas as pd
+import shutil, glob
+
+# ─── 阶段 1：背底处理 ────────────────────────────────────────────────────────
+# 第 2 步 — 加载原始 XRD 数据并拟合背底
+#
+#   文件格式     : 2 列，无表头行
+#                  第 1 列 = 2θ（度） |  第 2 列 = 强度
+#
+#   lowAngleRange : 背底拟合最小 2θ = ${bacLowAngle}°
+#                   （排除低角度空气散射伪峰）
+#   poly_n        : 背底曲线多项式阶数 = ${bacPolyN}
+#                   （阶数越高 → 越灵活；晶体样品用 8–10，
+#                    非晶含量高的样品用 10–15）
+#   bac_split     : 分段锚点数 = ${bacSplit}
+#                   （分段越多 → 局部背底控制越精细）
+#   bac_num       : 蒙特卡罗优化步数 = ${bacNum}
+#                   （步数越多 → 收敛越好，运行越慢）
+#
+#   ⚠️  输出：将创建 'ConvertedDocuments/' 文件夹。
+#   运行后，以下文件将自动复制到当前目录：
+#     ConvertedDocuments/bac.csv              →  bac.csv
+#     ConvertedDocuments/no_bac_intensity.csv →  no_bac_intensity.csv
+intensity_csv = pd.read_csv(r'intensity.csv', header=None)
+var = WPEM.BackgroundFit(
+    intensity_csv,
+    lowAngleRange=${bacLowAngle},
+    poly_n=${bacPolyN},
+    bac_split=${bacSplit},
+    bac_num=${bacNum}
+)
+
+# 将输出文件复制到工作目录
+shutil.copy('ConvertedDocuments/bac.csv', 'bac.csv')
+shutil.copy('ConvertedDocuments/no_bac_intensity.csv', 'no_bac_intensity.csv')
+print("背底文件已复制到工作目录。")
+
+# ─── 阶段 2：CIF 预处理 ──────────────────────────────────────────────────────
+# 第 3 步 — 解析参考 CIF 文件，生成带指标的 HKL 峰位列表
+#
+#   filepath        : '${cifName}' — 请将此文件放于当前目录
+#   two_theta_range : (${ttMin}, ${ttMax})° — 峰位生成的角度窗口
+#                     须与实测数据范围一致或略宽
+#
+#   返回值：
+#     latt            : 初始晶格常数 [a, b, c, α, β, γ]
+#                       晶系：${crystLabel}
+#                       当前值：[${la}, ${lb}, ${lc}, ${lalpha}, ${lbeta}, ${lgamma}]
+#     AtomCoordinates : CIF 中的分数原子坐标
+#     des             : 晶系描述字符串
+#
+#   ⚠️  输出：将创建 'output_xrd/' 文件夹，其中包含 xxxHKL.csv。
+latt, AtomCoordinates, des = WPEM.CIFpreprocess(
+    filepath='${cifName}',
+    two_theta_range=(${ttMin}, ${ttMax})
+)
+
+print(f"晶系：{des}")
+print(f"来自 CIF 的晶格常数：{latt}")
+
+# ─── 自动步骤：复制 HKL 文件 → peak0.csv ────────────────────────────────────
+# CIFpreprocess 运行后，自动定位 output_xrd/${cifBase}HKL.csv
+# 以下代码块将自动复制并重命名为 peak0.csv。
+hkl_files = glob.glob('output_xrd/*HKL.csv')
+if not hkl_files:
+    raise FileNotFoundError(
+        "在 output_xrd/ 中未找到 HKL 文件。"
+        "请确认 CIFpreprocess 已成功运行。"
+    )
+shutil.copy(hkl_files[0], 'peak0.csv')
+print(f"已复制 {hkl_files[0]} → peak0.csv ✓")
+
+# ─── 阶段 3：XRD 精修 ────────────────────────────────────────────────────────
+# 第 4 步 — 运行 WPEM XRD 晶格常数精修
+#
+#   wavelength          : [Kα₁, Kα₂]，单位为埃（Å）
+#   var                 : BackgroundFit 返回对象（来自阶段 1）
+#   Lattice_constants   : [latt] — 来自 CIFpreprocess 的初始晶格参数
+#   no_bac_intensity_file : 扣除背底后的数据文件
+#   original_file       : 原始 XRD 数据文件
+#   background_file     : 拟合背底数据文件
+#   subset_number       : WPEM EM 子集大小（mini-batch）= ${subsetN}
+#   low_bound           : 拟合下限 2θ = ${lowBound}°
+#   up_bound            : 拟合上限 2θ = ${upBound}°
+#   bta                 : EM 收敛速率 β = ${bta}
+#                         （0.1 = 快速/不稳定  —  1.0 = 慢速/稳定）
+#   iter_max            : 最大 EM 迭代次数 = ${iterMax}
+#   asy_C               : 峰形不对称系数 = ${asyC}
+#                         （0 = 对称 Voigt 峰；>0 = 低角度拖尾）
+#   InitializationEpoch : 神经网络预训练轮次 = ${initEp}
+#                         （0 = WPEM 默认 Voigt 初始化）
+
+wavelength            = [${wl1}, ${wl2}]
+no_bac_intensity_file = 'no_bac_intensity.csv'
+original_file         = 'intensity.csv'
+background_file       = 'bac.csv'
+Lattice_constants     = [latt,]          # 来自 CIFpreprocess
+
+runtime, refined_latt = WPEM.XRDfit(
+    wavelength, var, Lattice_constants,
+    no_bac_intensity_file, original_file, background_file,
+    subset_number=${subsetN},
+    low_bound=${lowBound},
+    up_bound=${upBound},
+    bta=${bta},
+    iter_max=${iterMax},
+    asy_C=${asyC},
+    InitializationEpoch=${initEp},
+)
+
+# 第 5 步 — 输出结果摘要
+print(f"\\n精修完成，用时：{runtime}")
+print(f"精修后的晶格常数：{refined_latt}")
+print("结果保存于：      WPEMFittingResults/")
+print("  • CrystalSystem0_WPEMout.csv — 分解后的峰强度")
+print("  • 拟合图像以 PNG 格式保存")
+`;
+  const pre=document.getElementById('codeRefPre');
+  pre.innerHTML=hl(code);
+  const sec=document.getElementById('codeRef');
+  sec.classList.add('show');
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+<footer style="border-top:1px solid var(--border);padding:1.4rem 2rem;text-align:center;font-size:.76rem;color:var(--txt3);position:relative;z-index:1">
+  RefineUI · PyXplore WPEM 工具包 &nbsp;·&nbsp;
+  <a href="https://bin-cao.github.io/" target="_blank" style="color:var(--txt2);text-decoration:none">Bin CAO</a>
+  &nbsp;·&nbsp; 香港科技大学（广州）| 香港城市大学 &nbsp;·&nbsp; © 2024–2026
+</footer>
+
+
+
+</body>
+</html>
